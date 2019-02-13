@@ -18,7 +18,7 @@ public class MySQLAdsDao implements Ads {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                 config.getUrl(),
-                config.getUser(),
+                config.getUsername(),
                 config.getPassword()
             );
         } catch (SQLException e) {
@@ -71,4 +71,19 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+
+    public List<Ad> getUsersAds(long id) throws SQLException {
+        String query = "SELECT * FROM ads WHERE user_id = ?";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setLong(1, id);
+        ResultSet rs = stmt.executeQuery();
+        List<Ad> userAds = createAdsFromResults(rs);
+
+        return userAds;
+    }
+
+
+
+
 }
