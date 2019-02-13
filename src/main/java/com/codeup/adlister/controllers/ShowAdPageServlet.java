@@ -10,7 +10,9 @@ import java.io.IOException;
     @WebServlet(name = "controllers.ShowAdPageServlet", urlPatterns = "/ads/show")
     public class ShowAdPageServlet extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String adId = request.getParameter("adid");
+
+            String adId = request.getParameter("adId");
+
             request.getRequestDispatcher("/WEB-INF/ads/show.jsp").forward(request, response);
 
         }
