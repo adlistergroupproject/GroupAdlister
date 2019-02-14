@@ -20,6 +20,9 @@ public class SearchServlet extends HttpServlet {
     {
         System.out.println("DEBUG: /search : doGet(...)");
         System.out.println("DEBUG: getQueryString(...) = " + request.getQueryString());
+
+        // select * from ads where title like "%ipsum%" or description like "%ipsum%";
+
         /*
         List<Ad> searchResults;
         try {
