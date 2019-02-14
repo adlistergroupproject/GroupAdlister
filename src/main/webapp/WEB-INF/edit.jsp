@@ -19,11 +19,27 @@
     <form action="/edit" method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" placeholder="${user.getUsername()}">
+            <input id="username" name="username" class="form-control" type="text" value=${sessionScope.user.username}>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text" placeholder="${user.getEmail()}">
+            <input id="email" name="email" class="form-control" type="text" value=${sessionScope.user.email}>
+        </div>
+        <h2>Change Password</h2>
+        <h4>Current password:</h4>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" name="username" class="form-control" type="password">
+        </div>
+        <h4>New Password:</h4>
+        <div class="form-group">
+            <label for="new-password">Password</label>
+            <input id="new-password" name="username" class="form-control" type="password">
+        </div>
+        <h4>Confirm New Password:</h4>
+        <div class="form-group">
+            <label for="confirm-new-password">Password</label>
+            <input id="confirm-new-password" name="username" class="form-control" type="password">
         </div>
         <input type="submit" class="btn btn-primary btn-block">
     </form>
