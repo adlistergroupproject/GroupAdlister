@@ -7,11 +7,9 @@
 <head>
 
     <jsp:include page="/WEB-INF/partials/head.jsp">
-
         <jsp:param name="title" value="adId"/>
         <jsp:param name="adTitle" value="ad.title"/>
         <jsp:param name="adDescription" value="ad.description"/>
-
     </jsp:include>
 
 </head>

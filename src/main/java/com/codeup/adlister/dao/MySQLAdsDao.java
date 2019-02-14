@@ -89,6 +89,7 @@ public class MySQLAdsDao implements Ads {
         stmt.setLong(1,id);
         ResultSet rs = stmt.executeQuery();
         Ad adById = null;
+
         while(rs.next()) {
             adById = extractAd(rs);
         }
