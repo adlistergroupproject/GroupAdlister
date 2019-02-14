@@ -1,9 +1,14 @@
-<jsp:useBean id="ad" scope="request" type="sun.awt.shell.ShellFolderColumnInfo"/>
+<%--@elvariable id="ad" type="org.w3c.dom.html.HTMLDocument"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>ad</title>
-<jsp:include page="/WEB-INF/partials/head.jsp"> </jsp:include>
+
+<jsp:include page="/WEB-INF/partials/head.jsp">
+
+<jsp:param name="title" value="adId"> </jsp:param>
+
+</jsp:include>
+
 
 </head>
 
@@ -11,8 +16,7 @@
 
     <h1>Hello! This is the ad information!!!</h1>
 
-    <h1> ${ad.title} </h1>
-        <h4> ${ad.description} </h4>
+    <h1>${ad.title}</h1>
 
 
 
