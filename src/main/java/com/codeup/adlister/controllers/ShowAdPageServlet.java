@@ -13,6 +13,6 @@ import java.io.IOException;
 
             String adId = request.getParameter("adId");
 
-            request.getRequestDispatcher("/WEB-INF/ads/show.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/ads/page.jsp").forward(request, response);
         }
     }
