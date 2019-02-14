@@ -11,7 +11,8 @@
 
 
 <div class="container">
-    <h1>Here Are all the ads!</h1>
+
+    <h1>Here Are All Ads</h1>
 
 
     <c:forEach var="ad" items="${ads}">
