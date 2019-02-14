@@ -1,7 +1,8 @@
 package com.codeup.adlister.controllers;
 
-import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.dao.MySQLSearchDao;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.dao.Config;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "controllers.SearchServlet", urlPatterns = "/search")
@@ -21,16 +21,16 @@ public class SearchServlet extends HttpServlet {
         System.out.println("DEBUG: /search : doGet(...)");
         System.out.println("DEBUG: getQueryString(...) = " + request.getQueryString());
 
-        // select * from ads where title like "%ipsum%" or description like "%ipsum%";
+        String query = request.getQueryString();
 
-        /*
-        List<Ad> searchResults;
-        try {
-            userAds = DaoFactory.getAdsDao().getUsersAds(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        List<Ad> searchResults = new MySQLSearchDao(new Config()).search(query, query);
+        if(searchResults == null){
+            System.out.println("DEBUG: no search results.");
+        }else{
+            for(Ad ad : searchResults){
+                System.out.println("DEBUG: " + ad.getTitle());
+            }
         }
-        */
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
