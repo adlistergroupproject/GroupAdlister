@@ -18,8 +18,5 @@
 
     <h1>${ad.title}</h1>
 
-
-
-    
 </body>
 </html>
