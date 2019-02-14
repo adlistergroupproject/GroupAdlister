@@ -16,7 +16,10 @@ public class EditProfileServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        if (request.getSession().getAttribute("user") == null) {
+            response.sendRedirect("/login");
+            return;
+        }
         request.getRequestDispatcher("/WEB-INF/edit.jsp").forward(request, response);
 
     }
@@ -43,12 +46,12 @@ public class EditProfileServlet extends HttpServlet {
 //        2. Check if the new password matches the confirm password
                 if(validatePassword){
                     if(newPassword.equals(confirmNewPassword)){
-//
+//                      then good to go, allowed to click save button
                     } else {
-//                        message tht new passwords dont match
+//                        message tht new passwords don't match
                     }
                 } else {
-//                    put an error message that password doesnt match old password
+//                    put an error message that password doesn't match old password
                 }
 
 
@@ -56,7 +59,8 @@ public class EditProfileServlet extends HttpServlet {
 
 //                      4. Update the password in the DB
 
-
+//                            5. redirect to profile
+                                response.sendRedirect("/profile");
 
     }
 

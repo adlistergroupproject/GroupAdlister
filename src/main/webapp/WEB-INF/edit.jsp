@@ -41,7 +41,7 @@
             <label for="confirmNewPassword">Password</label>
             <input id="confirmNewPassword" name="username" class="form-control" type="password">
         </div>
-        <input type="submit" class="btn btn-primary btn-block">
+        <input type="submit" value="Save" class="btn btn-primary btn-block">
     </form>
 </div>
 </body>
