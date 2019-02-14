@@ -6,7 +6,7 @@
         </div>
         <div>
             <form method="get" action="/search">
-                <input type="text" name="">
+                <input type="text" name="query">
             </form>
         </div>
         <ul class="nav navbar-nav navbar-right">
