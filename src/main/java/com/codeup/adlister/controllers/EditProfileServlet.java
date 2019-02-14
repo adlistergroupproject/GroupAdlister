@@ -1,4 +1,3 @@
-//THIS CODE BREAKS THE PROFILE PAGE-- NEED TO FIX
 
 package com.codeup.adlister.controllers;
 
@@ -17,48 +16,48 @@ public class EditProfileServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         request.getRequestDispatcher("/WEB-INF/edit.jsp").forward(request, response);
 
-//        get the users information ready to use
-//        String username = (String) request.getSession().getAttribute("username");
-//        User user = DaoFactory.getUsersDao().findByUsername(username);
-//        request.getSession().setAttribute("username", user.getUsername());
-//        request.getSession().setAttribute("email", user.getEmail());
-//        request.getSession().setAttribute("password", user.getPassword());
-//        System.out.println(username);
-//        System.out.println(user.getEmail());
-//        System.out.println(user.getPassword());
-//
-
-
-//        String username = (String) request.getSession().getAttribute("username");
-//        String password = (String) request.getSession().getAttribute("password");
-//        String email = (String) request.getSession().getAttribute("email");
-//        request.setAttribute("username", user.getUsername());
-//        request.setAttribute("password", password);
-//        request.setAttribute("email", email);
-
-
-//        get the users information ready to use
-//        go to the edit page
-//        allow the user to change values in a form
     }
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-//        get the users information ready to use
+//      Gets the user info from the session and puts it in the form values
         String username = (String) request.getSession().getAttribute("username");
         User user = DaoFactory.getUsersDao().findByUsername(username);
         request.getSession().setAttribute("username", user.getUsername());
         request.getSession().setAttribute("email", user.getEmail());
         request.getSession().setAttribute("password", user.getPassword());
-        System.out.println(username);
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
+
+//      Send the edited features to the db:
+//            Get all of the needed inputs:
+                String updateUsername = request.getParameter("updateUsername");
+                String updateEmail = request.getParameter("updateEmail");
+                String password = request.getParameter("password");
+                String newPassword = request.getParameter("newPassword");
+                String confirmNewPassword = request.getParameter("confirmNewPassword");
+
+//        1. Check if the current password matches the password on the DB
+                boolean validatePassword = password.equals(user.getPassword());
+//        2. Check if the new password matches the confirm password
+                if(validatePassword){
+                    if(newPassword.equals(confirmNewPassword)){
+//
+                    } else {
+//                        message tht new passwords dont match
+                    }
+                } else {
+//                    put an error message that password doesnt match old password
+                }
 
 
-        //   send the edited features to the db
+//                3. Hash the new password
+
+//                      4. Update the password in the DB
+
+
+
     }
 
 
