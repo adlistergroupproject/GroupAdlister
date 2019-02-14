@@ -23,6 +23,7 @@
         </div>
         </a>
     </c:forEach>
+
 </div>
 
 </body>
