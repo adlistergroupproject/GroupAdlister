@@ -3,15 +3,12 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads {
-    private Connection connection = null;
+    protected Connection connection = null;
 
     public MySQLAdsDao(Config config) {
         try {
@@ -56,7 +53,7 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    private Ad extractAd(ResultSet rs) throws SQLException {
+    protected Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
@@ -65,7 +62,7 @@ public class MySQLAdsDao implements Ads {
         );
     }
 
-    private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
+    protected List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
         List<Ad> ads = new ArrayList<>();
         while (rs.next()) {
             ads.add(extractAd(rs));
@@ -97,7 +94,5 @@ public class MySQLAdsDao implements Ads {
 
         return adById;
     }
-
-
-
+    
 }
