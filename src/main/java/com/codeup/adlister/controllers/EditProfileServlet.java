@@ -48,7 +48,7 @@ public class EditProfileServlet extends HttpServlet {
                     if(newPassword.equals(confirmNewPassword)){
 //                      then good to go, allowed to click save button
                     } else {
-//                        message tht new passwords don't match
+//                        message that new passwords don't match
                     }
                 } else {
 //                    put an error message that password doesn't match old password
