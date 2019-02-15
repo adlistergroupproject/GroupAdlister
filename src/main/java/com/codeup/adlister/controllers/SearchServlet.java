@@ -1,5 +1,6 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.dao.MySQLSearchesDao;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.dao.Config;
@@ -25,26 +26,11 @@ public class SearchServlet extends HttpServlet {
 
         // get all the search works in an array of strings
         String[] keywords = request.getQueryString().replaceAll("query=", "").split("[+]");
-
-        // begin constructing the query
-        SQLQuery query = new SQLQuery().select("*").from("ads");
-        {
-            int index = 0;
-            for(String keyword : keywords) {
-                if (index == 0) {
-                    query = query.where(new SQLQuery("title").like(keyword)
-                            .and("description").like(keyword));
-                } else {
-                    query = query.or(new SQLQuery("title").like(keyword)
-                            .and("description").like(keyword));
-                }
-                index++;
-            }
-            // end query construction
-            query = query.done();
-        }
+        List<Ad> searchResult = DaoFactory.getSearchesDao().search(keywords);
         // DEBUG
-        System.out.println(query.toString());
+        for(Ad ad : searchResult){
+            System.out.println(ad.getTitle());
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

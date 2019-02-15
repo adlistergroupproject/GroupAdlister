@@ -1,15 +1,18 @@
 package com.codeup.adlister.dao;
 
 import java.util.List;
+import com.codeup.adlister.models.Ad;
 
 public interface Searches {
 
-    public List<Ads> search(String titles, String description);
+    public List<Ad> search(String titles, String description);
 
-    public List<Ads> searchTitles(String titles);
+    public List<Ad> search(String[] keywords);
 
-    public List<Ads> searchDescriptions(String descriptions);
+    public List<Ad> searchTitles(String titles);
 
-    public List<Ads> searchCategories(String[] categories);
+    public List<Ad> searchDescriptions(String descriptions);
+
+    public List<Ad> searchCategories(String[] categories);
 
 }
