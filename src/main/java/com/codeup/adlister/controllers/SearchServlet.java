@@ -26,11 +26,14 @@ public class SearchServlet extends HttpServlet {
 
         // get all the search works in an array of strings
         String[] keywords = request.getQueryString().replaceAll("query=", "").split("[+]");
-        List<Ad> searchResult = DaoFactory.getSearchesDao().search(keywords);
+        List<Ad> searchResults = DaoFactory.getSearchesDao().search(keywords);
         // DEBUG
-        for(Ad ad : searchResult){
+        for(Ad ad : searchResults){
             System.out.println(ad.getTitle());
         }
+
+        request.setAttribute("searchResults", searchResults);
+        request.getRequestDispatcher("/WEB-INF/search.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
