@@ -80,53 +80,9 @@ public class ChangePasswordServlet extends HttpServlet {
 }
 
 
-    //password stuff:
-//gets the current user info from session
-//User user = request.getSession().getAttribute("user");
 
-//    String originalPassword = user.getPassword(); this is from the user object
-//    String currentPasswordCheck = request.getParameter("current_password"); this is from the form
+//TODO: our objective is to append a query string key=>value pair to the URL of where you're headed
+//    possibly setQueryString method and that will last one page load only
+//    research this: https://www.ocpsoft.org/opensource/how-to-safely-add-modify-servlet-request-parameter-values/
 
-//   String newPassword = request.getParameter("new_password);
-
-//BCrypt checkhash()
-
-//if (valid) {
-//    user = DaoFactory.getUsersDao().updatePassword(newPassword);
-//        }
-
-
-
-
-//        1. Check if the current password matches the password on the DB
-//                boolean validatePassword = password.equals(user.getPassword());
-
-//        2. Check if the new password matches the confirm password
-//               String passwordIncorrect;
-//               String newPasswordDoesntMatch;
-
-//        if(true){
-//                    if(newPassword.equals(confirmNewPassword)){
-////                      then good to go, allowed to click save button
-//
-//                    } else {
-//                    // display a message that new passwords don't match
-//                    newPasswordDoesntMatch = "Passwords do not match. Please try again.";
-//                    request.setAttribute("newPasswordDoesntMatch", newPasswordDoesntMatch );
-//
-//                    }
-//                // if current password typed in doesn't match whats on the db
-//                } else {
-//                // put an error message that password doesn't match old password
-//                      passwordIncorrect = "Incorrect Password. Please enter your current password:";
-//                      request.setAttribute("passwordIncorrect", passwordIncorrect);
-//                      response.sendRedirect("/edit");
-//                }
-//
-//
-////                3. Hash the new password
-////                        hashpassword method here
-//
-////                      4. Update the password in the DB
-////                          call the updateUser method here to update info in the database
 }
