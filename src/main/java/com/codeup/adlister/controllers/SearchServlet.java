@@ -3,6 +3,7 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.MySQLSearchesDao;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.dao.Config;
+import com.codeup.adlister.util.GetSanitizer;
 import com.codeup.adlister.util.SQLQuery;
 
 import javax.servlet.ServletException;
@@ -22,10 +23,26 @@ public class SearchServlet extends HttpServlet {
         System.out.println("DEBUG: /search : doGet(...)");
         System.out.println("DEBUG: getQueryString(...) = " + request.getQueryString());
 
-        //String query = request.getQueryString();
+        // get all the search works in an array of strings
+        String[] keywords = request.getQueryString().replaceAll("query=", "").split("[+]");
 
-        SQLQuery query = new SQLQuery().select("*").from("users").where("user_id").like("1").done();
-        query = new SQLQuery().select("user_id").from("users").where("user_id").like("2").done();
+        // begin constructing the query
+        SQLQuery query = new SQLQuery()
+                .select("*").from("ads");
+        {
+            int index = 0;
+            for(String keyword : keywords) {
+                if (index == 0) {
+                    query = query.where("title").like(keyword)
+                            .and("description").like(keyword);
+                } else {
+                    query = query.or("title").like(keyword)
+                            .and("description").like(keyword);
+                }
+                index++;
+            }
+            query = query.done();
+        }
 
         System.out.println(query.toString());
     }
