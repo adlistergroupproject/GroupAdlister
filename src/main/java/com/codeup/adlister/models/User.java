@@ -57,10 +57,17 @@ public class User implements Jsonable {
     }
 
     public String toJSON(){
-        return null;
+        String json = "{";
+        json += "\"id\":\"" + this.id + "\",";
+        json += "\"username\":\"" + this.username + "\",";
+        json += "\"email\":\"" + this.email + "\",";
+        json += "}";
+        return json;
     }
 
     public String toString(){
-        return null;
+        return "id: " + this.id +
+                "\tusername: " + this.username +
+                "\temail" + this.email;
     }
 }
