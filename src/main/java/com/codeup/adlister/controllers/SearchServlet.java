@@ -1,8 +1,9 @@
 package com.codeup.adlister.controllers;
 
-import com.codeup.adlister.dao.MySQLSearchDao;
+import com.codeup.adlister.dao.MySQLSearchesDao;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.dao.Config;
+import com.codeup.adlister.util.SQLQuery;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,16 +22,12 @@ public class SearchServlet extends HttpServlet {
         System.out.println("DEBUG: /search : doGet(...)");
         System.out.println("DEBUG: getQueryString(...) = " + request.getQueryString());
 
-        String query = request.getQueryString();
+        //String query = request.getQueryString();
 
-        List<Ad> searchResults = new MySQLSearchDao(new Config()).search(query, query);
-        if(searchResults == null){
-            System.out.println("DEBUG: no search results.");
-        }else{
-            for(Ad ad : searchResults){
-                System.out.println("DEBUG: " + ad.getTitle());
-            }
-        }
+        SQLQuery query = new SQLQuery().select("*").from("users").where("user_id").like("1").done();
+        query = new SQLQuery().select("user_id").from("users").where("user_id").like("2").done();
+
+        System.out.println(query.toString());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
