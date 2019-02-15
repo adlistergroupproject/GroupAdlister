@@ -1,8 +1,9 @@
 package com.codeup.adlister.models;
 
+import com.codeup.adlister.util.Jsonable;
 import com.codeup.adlister.util.Password;
 
-public class User {
+public class User implements Jsonable {
     private long id;
     private String username;
     private String email;
@@ -53,5 +54,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = Password.hash(password);
+    }
+
+    public String toJSON(){
+        return null;
+    }
+
+    public String toString(){
+        return null;
     }
 }
