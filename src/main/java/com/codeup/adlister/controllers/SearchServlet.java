@@ -27,23 +27,23 @@ public class SearchServlet extends HttpServlet {
         String[] keywords = request.getQueryString().replaceAll("query=", "").split("[+]");
 
         // begin constructing the query
-        SQLQuery query = new SQLQuery()
-                .select("*").from("ads");
+        SQLQuery query = new SQLQuery().select("*").from("ads");
         {
             int index = 0;
             for(String keyword : keywords) {
                 if (index == 0) {
-                    query = query.where("title").like(keyword)
-                            .and("description").like(keyword);
+                    query = query.where(new SQLQuery("title").like(keyword)
+                            .and("description").like(keyword));
                 } else {
-                    query = query.or("title").like(keyword)
-                            .and("description").like(keyword);
+                    query = query.or(new SQLQuery("title").like(keyword)
+                            .and("description").like(keyword));
                 }
                 index++;
             }
+            // end query construction
             query = query.done();
         }
-
+        // DEBUG
         System.out.println(query.toString());
     }
 

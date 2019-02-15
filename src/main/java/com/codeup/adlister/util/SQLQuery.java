@@ -20,8 +20,7 @@ public class SQLQuery {
 
         if(columns.length == 1){
             return select(columns[0]);
-        }
-        else {
+        } else {
             this.query = "SELECT ";
             int index = 0;
             for(String column : columns){
@@ -40,16 +39,34 @@ public class SQLQuery {
         return new SQLQuery(this.query + " FROM " + table);
     }
 
+    // standard where query
     public SQLQuery where(String column){
         return new SQLQuery(this.query + " WHERE " + column);
     }
 
+    // WHERE that supports subqueries
+    public SQLQuery where(SQLQuery subquery){
+        return new SQLQuery(this.query + " WHERE (" + subquery.toString() + ")");
+    }
+
+    // standard OR
     public SQLQuery or(String column){
         return new SQLQuery(this.query + " OR " + column);
     }
 
+    // OR that supports subqueries
+    public SQLQuery or(SQLQuery subquery){
+        return new SQLQuery(this.query + " OR (" + subquery.toString() + ")");
+    }
+
+    // standard AND
     public SQLQuery and(String column){
         return new SQLQuery(this.query + " AND " + column);
+    }
+
+    // AND that support subqueries
+    public SQLQuery and(SQLQuery subquery){
+        return new SQLQuery(this.query + " AND (" + subquery.toString() + ")");
     }
 
     public SQLQuery like(String elem){
