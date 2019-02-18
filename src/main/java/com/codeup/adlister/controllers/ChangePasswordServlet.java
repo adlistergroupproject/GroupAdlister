@@ -40,20 +40,18 @@ public class ChangePasswordServlet extends HttpServlet {
         boolean comparePasswords = (BCrypt.checkpw(enteredPasswordComparison, originalPassword));
         if (!comparePasswords) {
             System.out.println("Invalid Password");
-            String invalidPassword = "Invalid Password";
-            request.setAttribute("invalidPassword", invalidPassword);
+            response.sendRedirect("/invalid-password");
 
         //  If the password on the user matches the password entered, then the user can move to change password:
          } else if(comparePasswords) {
-    //  Now we need to check if the new password and confirm password match:
+
+        //  Now we need to check if the new password and confirm password match:
         String newPassword = request.getParameter("new_password");
         String confirmPassword = request.getParameter("confirm_password");
 
             if(newPassword.equals(confirmPassword)) {
-    //      if the passwords match, it will show "passwords match" message on the page and in the console
+        //  if the passwords match, it will show "passwords match" message on the page and in the console
                 System.out.println("Passwords match!");
-                String passwordsMatch = "Passwords match";
-                request.setAttribute("passwordsMatch", passwordsMatch);
 
             //  hash the new password before saving into the db:
                 String newPasswordHash = BCrypt.hashpw(newPassword, BCrypt.gensalt());
@@ -67,12 +65,9 @@ public class ChangePasswordServlet extends HttpServlet {
                 response.sendRedirect("/profile");
 
             } else {
-            // if the passwords don't match, it will show "passwords don't match" message
             // on the page and in the console and not allow user to proceed
                 System.out.println("Passwords don't match");
-                String newPasswordDoesntMatch = "Passwords don't match.";
-                request.setAttribute("newPasswordDoesntMatch", newPasswordDoesntMatch);
-                response.sendRedirect("/change-password");
+                response.sendRedirect("/passwords-dont-match");
             }
     }
 
