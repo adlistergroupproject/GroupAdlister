@@ -14,7 +14,7 @@ public class Ad implements Jsonable {
     private long userId;
     private String title;
     private String description;
-    private List<String> categories;
+    private List<Category> categories;
 
     @Deprecated
     public Ad(long id, long userId, String title, String description) {
@@ -33,7 +33,7 @@ public class Ad implements Jsonable {
         this.categories = null;
     }
 
-    public Ad(long id, long userId, String title, String description, List<String> categories)
+    public Ad(long id, long userId, String title, String description, List<Category> categories)
         throws NullPointerException,
             NumberFormatException,
             StringFormatException
@@ -42,7 +42,7 @@ public class Ad implements Jsonable {
             throw new NullPointerException();
         } else if(id < 0 || userId < 0){
             throw new NumberFormatException();
-        } else if(title.equals("") || description.equals("") || validStringList(categories)){
+        } else if(title.equals("") || description.equals("")){
             throw new StringFormatException("Empty string not allowed.");
         }
         this.id = id;
@@ -93,19 +93,19 @@ public class Ad implements Jsonable {
         this.description = description;
     }
 
-    public void addCategory(String category)
+    public void addCategory(Category category)
             throws StringFormatException
     {
         if(category.equals("")){
             throw new StringFormatException("Empty string not allowed.");
         }
         if(this.categories == null){
-            this.categories = new ArrayList<String>();
+            this.categories = new ArrayList<Category>();
         }
         this.categories.add(category);
     }
 
-    public List<String> getCategories()
+    public List<Category> getCategories()
         throws NullPointerException
     {
         if(this.categories == null){
