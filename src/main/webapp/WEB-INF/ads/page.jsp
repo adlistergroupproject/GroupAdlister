@@ -27,7 +27,7 @@
             <div class="col-md-6">
                     <h2>${adInfo.title}</h2>
                     <p>${adInfo.description}</p>
-                <a href="/edit-ad?adId=<c:out value="${ad.id}"/>">
+                <a href="/edit-ad?adId=<c:out value="${adInfo.id}"/>">
                     Edit
                 </a>
             </div>
@@ -40,3 +40,5 @@
 </body>
 
 </html>
+
+

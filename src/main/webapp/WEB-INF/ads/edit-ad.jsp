@@ -26,12 +26,13 @@
     <h1>Edit Your Ad</h1>
     <form action="/edit-ad" method="post">
         <div class="form-group">
+            <input type="hidden" value="${adInfo.id}" name="adId">
             <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" type="text" value=${adInfo.title}>
+            <input id="title" name="title" class="form-control" type="text" value="${adInfo.title}">
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control" type="text" value=${adInfo.description}></textarea>
+            <textarea id="description" name="description" class="form-control">${adInfo.description}</textarea>
         </div>
         <input type="submit" class="btn btn-block btn-primary">
     </form>

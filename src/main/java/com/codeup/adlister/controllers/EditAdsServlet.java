@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-@WebServlet(name = "controllers.editAdsServlet", urlPatterns = "/edit-ad")
-public class editAdsServlet extends HttpServlet {
+@WebServlet(name = "controllers.EditAdsServlet", urlPatterns = "/edit-ad")
+public class EditAdsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
@@ -28,6 +28,9 @@ public class editAdsServlet extends HttpServlet {
 
         } catch (SQLException e){
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println(adId);
+            System.out.println(adInfo);
         }
         request.setAttribute("adInfo", adInfo);
 
@@ -41,18 +44,18 @@ public class editAdsServlet extends HttpServlet {
         long adId = Long.parseLong(request.getParameter( "adId"));
         System.out.println(adId);
 
-////      get the Ad:
-//        Ad adInfo = null;
-//        try {
-//            adInfo = DaoFactory.getAdsDao().getAdById(adId);
-////
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//        request.setAttribute("adId", adId);
-//        request.setAttribute("adInfo", adInfo);
-//        System.out.println(adId);
-//        System.out.println(adInfo);
+//      get the Ad:
+        Ad adInfo = null;
+        try {
+            adInfo = DaoFactory.getAdsDao().getAdById(adId);
+//
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        request.setAttribute("adId", adId);
+        request.setAttribute("adInfo", adInfo);
+        System.out.println(adId);
+        System.out.println(adInfo);
 
 
 //      get the edited info from the form
@@ -62,7 +65,7 @@ public class editAdsServlet extends HttpServlet {
 //     updates the Ad object in the db
        DaoFactory.getAdsDao().updateAdInfo(updateTitle, updateDescription, adId);
 
-
+        request.setAttribute("adInfo", adInfo);
 //     5. redirect to profile
        response.sendRedirect("/profile");
 
