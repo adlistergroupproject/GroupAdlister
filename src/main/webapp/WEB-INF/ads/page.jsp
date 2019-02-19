@@ -20,6 +20,7 @@
 
     <div class="container">
 
+
         <h1>Ad Info.</h1>
 
 
@@ -31,9 +32,6 @@
                     Edit
                 </a>
             </div>
-
-
-
     </div>
 
 

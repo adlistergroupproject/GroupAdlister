@@ -1,6 +1,9 @@
 package com.codeup.adlister.models;
 
-public class Ad {
+import com.codeup.adlister.util.Jsonable;
+
+public class Ad implements Jsonable {
+
     private long id;
     private long userId;
     private String title;
@@ -49,5 +52,22 @@ public class Ad {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String toJSON(){
+        String json = "{";
+        json += "\"id\":\"" + this.id + "\",";
+        json += "\"userId\":\"" + this.userId + "\",";
+        json += "\"title\":\"" + this.title + "\",";
+        json += "\"description\":\"" + this.description + "\",";
+        json += "}";
+        return json;
+    }
+
+    public String toString(){
+        return "id: " + this.id +
+            "\tuserId: " + this.userId +
+            "\ttitle: " + this.title +
+            "\tdescription: " + this.description;
     }
 }
