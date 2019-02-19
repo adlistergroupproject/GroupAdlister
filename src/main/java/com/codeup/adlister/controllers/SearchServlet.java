@@ -24,7 +24,7 @@ public class SearchServlet extends HttpServlet {
         System.out.println("DEBUG: /search : doGet(...)");
         System.out.println("DEBUG: getQueryString(...) = " + request.getQueryString());
 
-        // get all the search works in an array of strings
+        // get all the search words in an array of strings
         String[] keywords = request.getQueryString().replaceAll("query=", "").split("[+]");
         List<Ad> searchResults = DaoFactory.getSearchesDao().search(keywords);
         // DEBUG

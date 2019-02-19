@@ -69,4 +69,63 @@ public class MySQLUsersDao implements Users {
         );
     }
 
+
+    @Override
+    public User findUserById(long id) {
+        String query = "SELECT * FROM users WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by id", e);
+        }
+    }
+
+
+
+    @Override
+    public User updateUserPassword(String password, long id){
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+        User updatedUserPassword;
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, password);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+            updatedUserPassword = findUserById(id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating the user", e);
+        }
+        return updatedUserPassword;
+    }
+
+
+
+    @Override
+    public User updateUserInfo(String username, String email, long id){
+        String query = "UPDATE users SET username = ?, email = ? WHERE id = ?";
+        User updatedUserInfo;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, email);
+            stmt.setLong(3, id);
+            stmt.executeUpdate();
+            updatedUserInfo = findUserById(id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating the user", e);
+        }
+
+//        this is the updated user object
+
+        return updatedUserInfo;
+
+    };
+
+
+
+
 }

@@ -14,4 +14,8 @@ public interface Ads {
     List<Ad> getUsersAds(long id) throws SQLException;
 
     Ad getAdById(long id) throws SQLException;
+
+    Ad updateAdInfo(String title, String description, long id);
+
+    void deleteAd(Ad ad);
 }
