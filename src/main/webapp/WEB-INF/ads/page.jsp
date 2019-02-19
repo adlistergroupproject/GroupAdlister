@@ -25,8 +25,11 @@
 
 
             <div class="col-md-6">
-                <h2>${adInfo.title}</h2>
-                <p>${adInfo.description}</p>
+                    <h2>${adInfo.title}</h2>
+                    <p>${adInfo.description}</p>
+                <a href="/edit-ad?adId=<c:out value="${ad.id}"/>">
+                    Edit
+                </a>
             </div>
 
 
