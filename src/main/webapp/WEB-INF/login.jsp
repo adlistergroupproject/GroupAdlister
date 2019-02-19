@@ -22,5 +22,4 @@
         </form>
     </div>
 </body>
-<script src="js/validator.js"></script>
 </html>

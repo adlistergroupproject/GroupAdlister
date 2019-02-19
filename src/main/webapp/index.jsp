@@ -11,5 +11,6 @@
     <div class="container">
         <h1>Welcome to the Adlister!</h1>
     </div>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
 </body>
 </html>
