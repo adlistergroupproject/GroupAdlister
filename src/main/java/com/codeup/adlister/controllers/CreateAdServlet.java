@@ -28,6 +28,9 @@ public class CreateAdServlet extends HttpServlet {
             user.getId(),
             request.getParameter("title"),
             request.getParameter("description")
+//   once we merge and pull from master I can add in the price field that James added to the ads table in the db:
+//            request.getParameter("price")
+
         );
         DaoFactory.getAdsDao().insert(ad);
         response.sendRedirect("/ads");

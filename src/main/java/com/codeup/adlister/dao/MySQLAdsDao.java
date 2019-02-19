@@ -14,9 +14,9 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                    config.getUrl(),
-                    config.getUser(),
-                    config.getPassword()
+                config.getUrl(),
+                config.getUser(),
+                config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -55,10 +55,10 @@ public class MySQLAdsDao implements Ads {
 
     protected Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
-                rs.getLong("id"),
-                rs.getLong("user_id"),
-                rs.getString("title"),
-                rs.getString("description")
+            rs.getLong("id"),
+            rs.getLong("user_id"),
+            rs.getString("title"),
+            rs.getString("description")
         );
     }
 
@@ -84,11 +84,11 @@ public class MySQLAdsDao implements Ads {
     public Ad getAdById(long id) throws SQLException {
         String query = "SELECT * FROM ads WHERE id = ?";
         PreparedStatement stmt = connection.prepareStatement(query);
-        stmt.setLong(1, id);
+        stmt.setLong(1,id);
         ResultSet rs = stmt.executeQuery();
         Ad adById = null;
 
-        while (rs.next()) {
+        while(rs.next()) {
             adById = extractAd(rs);
         }
 
@@ -96,11 +96,12 @@ public class MySQLAdsDao implements Ads {
     }
 
 
-    public Ad updateAdInfo(String title, String description, long id) {
+
+    public Ad updateAdInfo(String title, String description, long id){
         String query = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
-        Ad updatedAd = null;
+        Ad updatedAd;
         try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+            PreparedStatement stmt =connection.prepareStatement(query);
             stmt.setString(1, title);
             stmt.setString(2, description);
             stmt.setLong(3, id);
@@ -113,6 +114,22 @@ public class MySQLAdsDao implements Ads {
         return updatedAd;
     }
 
+    public void deleteAd(Ad ad){
+        String query = "DELETE FROM ads WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, ad.getId());
+            stmt.executeUpdate();
+            System.out.println("Ad deleted successfully!");
+        } catch(SQLException e){
+            throw new RuntimeException("Error, the Ad was not deleted.");
+        }
+
+
+    }
+
+
+//closes the class:
 }
 
 

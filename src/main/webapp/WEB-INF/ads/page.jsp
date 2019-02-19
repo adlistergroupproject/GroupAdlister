@@ -20,13 +20,23 @@
 
     <div class="container">
 
-        <div class="col-md-6">
-            <h2>${adInfo.title}</h2>
-            <p>${adInfo.description}</p>
-        </div>
+
+        <h1>Ad Info.</h1>
+
+
+
+            <div class="col-md-6">
+                    <h2>${adInfo.title}</h2>
+                    <p>${adInfo.description}</p>
+                <a href="/ads/edit?adId=<c:out value="${adInfo.id}"/>">
+                    Edit
+                </a>
+            </div>
     </div>
 
 
 </body>
 
 </html>
+
+
