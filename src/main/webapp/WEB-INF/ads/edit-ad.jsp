@@ -30,6 +30,11 @@
             <label for="title">Title</label>
             <input id="title" name="title" class="form-control" type="text" value="${adInfo.title}">
         </div>
+        <%--will have to add in the ${} to get the price once its in the db}--%>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" name="price" class="form-control">
+        </div>
         <div class="form-group">
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control">${adInfo.description}</textarea>

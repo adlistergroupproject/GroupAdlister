@@ -25,6 +25,8 @@
         <form action="/ads/delete" method="POST">
         <input type="hidden" value="${adInfo.id}" name="adId">
         <h2>${adInfo.title}</h2>
+     <%--will need to ad the price in here once its in the db:--%>
+        <h5>$ Price will go here</h5>
         <p>${adInfo.description}</p>
         <button name="id" value="${adInfo.id}" class="btn btn-danger">Delete</button>
         </form>
