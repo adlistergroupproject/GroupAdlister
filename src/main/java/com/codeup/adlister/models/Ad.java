@@ -33,7 +33,7 @@ public class Ad implements Jsonable {
         this.categories = null;
     }
 
-    public Ad(long id, long userId, String title, String description, List<Category> categories)
+    public Ad(long id, long userId, String title, String description, List<Category> categories, double price)
         throws NullPointerException,
             NumberFormatException,
             StringFormatException
@@ -50,6 +50,7 @@ public class Ad implements Jsonable {
         this.title = title;
         this.description = description;
         this.categories = categories;
+        this.price = price;
     }
 
     private boolean validStringList(List<String> strList){
