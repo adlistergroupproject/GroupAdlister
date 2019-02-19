@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-@WebServlet(name = "controllers.EditAdsServlet", urlPatterns = "/edit-ad")
+@WebServlet(name = "controllers.EditAdsServlet", urlPatterns = "/ads/edit")
 public class EditAdsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

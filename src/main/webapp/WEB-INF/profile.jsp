@@ -23,7 +23,7 @@
                             <p>${ad.description}</p>
                         </div>
                     </a>
-                    <a href="/edit-ad?adId=<c:out value="${ad.id}"/>">
+                    <a href="/ads/edit?adId=<c:out value="${ad.id}"/>">
                      Edit
                     </a>
                 </div>

@@ -24,7 +24,7 @@
 <body>
 <div class="container">
     <h1>Edit Your Ad</h1>
-    <form action="/edit-ad" method="post">
+    <form action="/ads/edit" method="post">
         <div class="form-group">
             <input type="hidden" value="${adInfo.id}" name="adId">
             <label for="title">Title</label>
