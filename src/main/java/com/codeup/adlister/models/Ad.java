@@ -2,7 +2,7 @@ package com.codeup.adlister.models;
 
 import com.codeup.adlister.util.Jsonable;
 import com.codeup.adlister.util.StringFormatException;
-import com.sun.tools.internal.ws.wsdl.document.jaxws.Exception;
+
 
 import java.util.ArrayList;
 import java.util.List;
