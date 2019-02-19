@@ -20,13 +20,10 @@ CREATE TABLE ads
     title       VARCHAR(128) NOT NULL,
     description TEXT         NOT NULL,
     view_count  INT UNSIGNED NOT NULL,
-    category_id INT UNSIGNED NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (category_id) REFERENCES ad_categories (category_id),
     FOREIGN KEY (user_id) REFERENCES users (id)
         ON DELETE CASCADE
 );
-
 
 CREATE TABLE categories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
