@@ -21,17 +21,6 @@ public class editAdsServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-
-        request.getRequestDispatcher("/WEB-INF/ads/edit-ad.jsp").forward(request, response);
-    }
-
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-
-
-//      get the info for the ad the user clicks on to edit and send to jsp for sticky form:
         long adId = Long.parseLong(request.getParameter( "adId"));
         Ad adInfo = null;
         try {
@@ -40,8 +29,31 @@ public class editAdsServlet extends HttpServlet {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        request.setAttribute("adId", adId);
         request.setAttribute("adInfo", adInfo);
+
+        request.getRequestDispatcher("/WEB-INF/ads/edit-ad.jsp").forward(request, response);
+    }
+
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("line above the problem");
+        long adId = Long.parseLong(request.getParameter( "adId"));
+        System.out.println(adId);
+
+////      get the Ad:
+//        Ad adInfo = null;
+//        try {
+//            adInfo = DaoFactory.getAdsDao().getAdById(adId);
+////
+//        } catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//        request.setAttribute("adId", adId);
+//        request.setAttribute("adInfo", adInfo);
+//        System.out.println(adId);
+//        System.out.println(adInfo);
+
 
 //      get the edited info from the form
         String updateTitle = request.getParameter("title");
