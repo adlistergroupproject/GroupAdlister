@@ -21,7 +21,7 @@ import java.sql.SQLException;
                 response.sendRedirect("/login");
                 return;
             }
-
+//          get the ad info for the purpose of sticky forms:
             long adId = Long.parseLong(request.getParameter( "adId"));
             Ad adInfo = null;
             try {
@@ -37,21 +37,24 @@ import java.sql.SQLException;
 
 
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+            System.out.println("YOU MADE IT INTO THE DO POST WOOHOO");
+            System.out.println(request.getParameter("adId"));
+//          Get the ad id that was submitted by the delete button:
+            long adIdToDelete = Long.parseLong(request.getParameter("adId"));
+//          Use this id to get the ad object to delete:
+            Ad adToDelete = null;
+            try {
+                adToDelete = DaoFactory.getAdsDao().getAdById(adIdToDelete);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-//            example:
-//            User currentUser = (User) request.getSession().getAttribute("user");
-//            long userId = currentUser.getId();
-//
-//            String updateUsername = request.getParameter("username");
-//            String updateEmail = request.getParameter("email");
-////
-//            User updatedUser = DaoFactory.getUsersDao().updateUserInfo(updateUsername, updateEmail, userId);
-//
-////             5. redirect to profile
-//            request.getSession().setAttribute("user", updatedUser);
-//            response.sendRedirect("/profile");
-//
-//        }
+//          Delete the ad from the db:
+            DaoFactory.getAdsDao().deleteAd(adToDelete);
+
+//          5. redirect to profile
+            response.sendRedirect("/profile");
+
 
         }
 

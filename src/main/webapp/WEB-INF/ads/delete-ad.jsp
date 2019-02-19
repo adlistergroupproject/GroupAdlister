@@ -22,10 +22,11 @@
 
     <h1>Are you sure you want to delete this ad?</h1>
     <div class="col-md-6">
-        <form action="ads/delete" method="POST">
+        <form action="/ads/delete" method="POST">
+        <input type="hidden" value="${adInfo.id}" name="adId">
         <h2>${adInfo.title}</h2>
         <p>${adInfo.description}</p>
-        <button name="id" value="${adInfo.id}" class="btn ntn-danger">Delete</button>
+        <button name="id" value="${adInfo.id}" class="btn btn-danger">Delete</button>
         </form>
     </div>
 </div>

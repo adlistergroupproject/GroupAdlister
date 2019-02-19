@@ -15,5 +15,7 @@ public interface Ads {
 
     Ad getAdById(long id) throws SQLException;
 
-   Ad updateAdInfo(String title, String description, long id);
+    Ad updateAdInfo(String title, String description, long id);
+
+    void deleteAd(Ad ad);
 }
