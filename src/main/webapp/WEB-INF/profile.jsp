@@ -23,9 +23,8 @@
                             <p>${ad.description}</p>
                         </div>
                     </a>
-                    <a href="/ads/edit?adId=<c:out value="${ad.id}"/>">
-                     Edit
-                    </a>
+                    <a href="/ads/edit?adId=<c:out value="${ad.id}"/>">Edit</a>
+                    <a href="/ads/delete?adId=<c:out value="${ad.id}"/>">Delete</a>
                 </div>
         </c:forEach>
 
