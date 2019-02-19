@@ -22,10 +22,10 @@ public class MySQLSearchesDao extends MySQLAdsDao implements Searches {
             for(String keyword : keywords) {
                 if (index == 0) {
                     query = query.where(new SQLQuery("title").like(keyword)
-                            .and("description").like(keyword));
+                            .or("description").like(keyword));
                 } else {
                     query = query.or(new SQLQuery("title").like(keyword)
-                            .and("description").like(keyword));
+                            .or("description").like(keyword));
                 }
                 index++;
             }
