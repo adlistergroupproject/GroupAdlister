@@ -1,9 +1,19 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.CategoryMap;
+import com.codeup.adlister.util.SingletonException;
+
 public class DaoFactory {
+
+    // database accessors
     private static Ads adsDao;
     private static Users usersDao;
     private static Searches searchesDao;
+
+    // the categories dao currently does not belong to sql and exists in the java memory
+    private static Categories categoriesDao;
+
+    // user configuration for db access
     private static Config config = new Config();
 
     public static Ads getAdsDao() {
@@ -27,5 +37,15 @@ public class DaoFactory {
         return usersDao;
     }
 
+    public static Categories getCategoriesDao(){
+        if(categoriesDao == null){
+            try {
+                categoriesDao = new CategoryMap();
+            } catch (SingletonException e) {
+                e.printStackTrace();
+            }
+        }
+        return categoriesDao;
+    }
 
 }

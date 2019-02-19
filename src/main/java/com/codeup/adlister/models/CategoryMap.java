@@ -1,14 +1,14 @@
 package com.codeup.adlister.models;
 
+import com.codeup.adlister.dao.Categories;
 import com.codeup.adlister.util.SingletonException;
-import org.graalvm.compiler.nodes.memory.MemoryCheckpoint;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class CategoryMap {
+public class CategoryMap implements Categories {
 
     private HashMap<String, String> categories;
     protected static int instances = 0;

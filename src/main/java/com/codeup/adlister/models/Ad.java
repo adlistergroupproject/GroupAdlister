@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Ad implements Jsonable {
 
+    private double price;
     private long id;
     private long userId;
     private String title;
