@@ -1,5 +1,8 @@
 package com.codeup.adlister.models;
 
+import com.codeup.adlister.util.SingletonException;
+import org.graalvm.compiler.nodes.memory.MemoryCheckpoint;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +11,14 @@ import java.util.Set;
 public class CategoryMap {
 
     private HashMap<String, String> categories;
+    protected static int instances = 0;
 
-    public CategoryMap() {
+    public CategoryMap() throws SingletonException {
+        instances++;
+        if(instances > 1){
+            throw new SingletonException("Cannot instantiate multiple " + this.getClass().toString());
+        }
+
         this.categories = new HashMap<>();
         this.categories.put("ACTIVITIES", "activities");
         this.categories.put("ARTISTS", "artists");
