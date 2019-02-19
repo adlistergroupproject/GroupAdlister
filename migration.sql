@@ -20,7 +20,7 @@ CREATE TABLE ads
     title       VARCHAR(128) NOT NULL,
     description TEXT         NOT NULL,
     view_count  INT UNSIGNED NOT NULL,
-    price DOUBLE UNSIGNED NULL,
+    price DOUBLE UNSIGNED NOT NULL DEFAULT '0.00',
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
         ON DELETE CASCADE
