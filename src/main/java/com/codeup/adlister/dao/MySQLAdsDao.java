@@ -76,7 +76,7 @@ public class MySQLAdsDao implements Ads {
                 rs.getString("description"),
                 categories,
                 rs.getDouble("price"),
-                rs.getInt("viewCount")
+                rs.getInt("view_count")
             );
         } catch (StringFormatException e) {
             e.printStackTrace();
