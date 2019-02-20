@@ -3,13 +3,9 @@ target/
 .idea/
 Config.java
 
-add unique to categories and email and usernames -- done
-
-finish dynamic nav bar --
+finish dynamic nav bar -- need lexi's signed in or not method
 
 add counter from counter servlet to single page ad view --
 
 add categories to everything -- I'll do it with lexi tomorrow morning
-
-styling
 
