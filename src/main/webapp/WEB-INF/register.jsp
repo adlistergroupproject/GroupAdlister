@@ -11,20 +11,20 @@
         <h1>Please fill in your information.</h1>
         <form action="/register" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
+                <label for="register-username">Username</label>
+                <input id="register-username" name="username" class="form-control" type="text">
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input id="email" name="email" class="form-control" type="text">
+                <label for="register-email">Email</label>
+                <input id="register-email" name="email" class="form-control" type="text">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input id="password" name="password" class="form-control" type="password">
+                <label for="register-password">Password</label>
+                <input id="register-password" name="password" class="form-control" type="password">
             </div>
             <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
-                <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+                <label for="register-confirm-password">Confirm Password</label>
+                <input id="register-confirm-password" name="confirm_password" class="form-control" type="password">
             </div>
             <input type="submit" class="btn btn-primary btn-block">
         </form>
