@@ -15,8 +15,11 @@ import java.util.List;
 
 @WebServlet(name = "controllers.ShowAdPageServlet", urlPatterns = "/ads/show")
     public class ShowAdPageServlet extends HttpServlet {
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        private int counter = 0;
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            counter += 1;
+            response.getWriter().println("page view count is: " + counter);
             long adId = Long.parseLong(request.getParameter( "adId"));
             Ad adInfo = null;
             try {
