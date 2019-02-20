@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.util.SQLQuery;
 import com.codeup.adlister.util.StringFormatException;
 import com.mysql.cj.jdbc.Driver;
@@ -57,7 +58,15 @@ public class MySQLAdsDao implements Ads {
 
 
 
+
+
+
     protected Ad extractAd(ResultSet rs) throws SQLException {
+        List<Category> categories = new ArrayList<>();
+        categories.add(new Category());
+
+
+
         Ad ad = null;
         try {
              ad = new Ad(
@@ -65,7 +74,7 @@ public class MySQLAdsDao implements Ads {
                 rs.getLong("user_id"),
                 rs.getString("title"),
                 rs.getString("description"),
-                rs.get("categories"), // DON'T FORGET TO FILL THIS IN!!!!!!!!!!!!!!!!!!! -------------------------------------------------------
+                categories,
                 rs.getDouble("price"),
                 rs.getInt("viewCount")
             );
@@ -171,7 +180,7 @@ public class MySQLAdsDao implements Ads {
         return updatedAd;
     }
 
-    public Ad updateAdViewCount(int id){
+    public Ad updateAdViewCount(long id){
         String query = "UPDATE ads SET view_count = view_count + 1 WHERE id = ?";
         Ad updatedViewCount = null;
         try {
