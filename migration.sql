@@ -6,9 +6,9 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS ad_categories;
 
 CREATE TABLE users (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    username VARCHAR(128) NOT NULL,
-    email VARCHAR(128) NOT NULL,
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE ,
+    username VARCHAR(128) NOT NULL UNIQUE ,
+    email VARCHAR(128) NOT NULL UNIQUE ,
     password VARCHAR(256) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -30,7 +30,7 @@ drop table ads;
 
 CREATE TABLE categories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    category VARCHAR(64) NOT NULL,
+    category VARCHAR(64) NOT NULL UNIQUE,
     PRIMARY KEY (id)
 );
 

@@ -22,9 +22,9 @@
             <label>
                 <h4>Select one or multiple categories</h4>
                 <select>
-                <option value="sam">sam</option>
-                <option value="lexi">lexi</option>
-                <option value="james">james</option>
+                <option name ="category" value="sam">sam</option>
+                <option name ="category" value="lexi">lexi</option>
+                <option name ="category" value="james">james</option>
                 </select>
             </label>
 
