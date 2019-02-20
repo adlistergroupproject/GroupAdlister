@@ -2,6 +2,10 @@ package com.codeup.adlister.models;
 
 import com.codeup.adlister.util.Jsonable;
 import com.codeup.adlister.util.StringFormatException;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ead4c9da50f19680b0a116bbf6ae34fd64369c98
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,7 @@ public class Ad implements Jsonable {
     private String title;
     private String description;
     private List<Category> categories;
+    private int viewCount;
 
     @Deprecated
     public Ad(long id, long userId, String title, String description) {
@@ -32,7 +37,7 @@ public class Ad implements Jsonable {
         this.categories = null;
     }
 
-    public Ad(long id, long userId, String title, String description, List<Category> categories)
+    public Ad(long id, long userId, String title, String description, List<Category> categories, double price)
         throws NullPointerException,
             NumberFormatException,
             StringFormatException
@@ -49,6 +54,19 @@ public class Ad implements Jsonable {
         this.title = title;
         this.description = description;
         this.categories = categories;
+        this.price = price;
+    }
+
+    public Ad(long id, long userId, String title, String description, List<Category> categories, double price, int viewCount) throws
+            NullPointerException,
+            NumberFormatException,
+            StringFormatException{
+        this(id, userId, title, description, categories, price);
+        this.viewCount = viewCount;
+    }
+
+    public Ad(){
+        this.viewCount = viewCount;
     }
 
     private boolean validStringList(List<String> strList){
@@ -92,6 +110,12 @@ public class Ad implements Jsonable {
         this.description = description;
     }
 
+    public void setViewCount(int viewCount){
+        this.viewCount = viewCount;
+    }
+
+    public int getViewCount(){return viewCount;}
+
     public void addCategory(Category category)
             throws StringFormatException
     {
@@ -128,6 +152,7 @@ public class Ad implements Jsonable {
         return "id: " + this.id +
             "\tuserId: " + this.userId +
             "\ttitle: " + this.title +
-            "\tdescription: " + this.description;
+            "\tdescription: " + this.description +
+            "\tviewCount: " + this.viewCount;
     }
 }

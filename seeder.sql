@@ -1,5 +1,6 @@
 USE adlister_db;
 
+
 # clear all the tables if there is data
 # mysql will yell at us over foreign keys, so ignore them for now
 SET FOREIGN_KEY_CHECKS = 0;

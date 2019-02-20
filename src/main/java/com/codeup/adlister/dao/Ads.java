@@ -18,4 +18,7 @@ public interface Ads {
     Ad updateAdInfo(String title, String description, long id);
 
     void deleteAd(Ad ad);
-}
+
+    Ad updateAdViewCount(long id);
+
+    }

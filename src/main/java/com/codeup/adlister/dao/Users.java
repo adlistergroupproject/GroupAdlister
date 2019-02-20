@@ -10,4 +10,6 @@ public interface Users {
     User updateUserInfo(String username, String email, long user_id);
     User findUserById(long id);
     User updateUserPassword(String password, long id);
+    void deleteUser(User user);
+    void deleteUsersAds(User user);
 }
