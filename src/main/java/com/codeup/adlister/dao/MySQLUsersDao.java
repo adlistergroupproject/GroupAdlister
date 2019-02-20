@@ -125,6 +125,32 @@ public class MySQLUsersDao implements Users {
 
     }
 
+    public void deleteUser(User user){
+        String query = "DELETE FROM users WHERE id = ?";
+        try{
+            System.out.println(query);
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, user.getId());
+            stmt.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public void deleteUsersAds(User user) {
+        String query = "DELETE FROM ads WHERE user_id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, user.getId());
+            System.out.println(query);
+            stmt.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 
