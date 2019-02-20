@@ -1,6 +1,8 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.util.SQLQuery;
+import com.codeup.adlister.util.StringFormatException;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
@@ -53,14 +55,52 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+
+
     protected Ad extractAd(ResultSet rs) throws SQLException {
-        return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description")
-        );
+        Ad ad = null;
+        try {
+             ad = new Ad(
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description"),
+                rs.get("categories"), // DON'T FORGET TO FILL THIS IN!!!!!!!!!!!!!!!!!!! -------------------------------------------------------
+                rs.getDouble("price"),
+                rs.getInt("viewCount")
+            );
+        } catch (StringFormatException e) {
+            e.printStackTrace();
+        }
+        return ad;
     }
+
+
+
+//    protected ResultSet extractCategories (ResultSet rs){
+//        List<Categories> categories = null;
+//        SQLQuery query = new SQLQuery().select("*").from("ad_categories").where("ad_id = ?");
+//        try{
+//            PreparedStatement stmt = connection.prepareStatement(query.toString());
+//            stmt.setInt(1, id);
+//            ResultSet rs = stmt.executeQuery();
+//            List<Categories> adsCategories = createCategoriesList(rs);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        // need to return something here ----------------------------------------------------------------------
+//    }
+//
+
+//    protected List<Categories> createCategoriesList(ResultSet rs){
+//        List<Categories> categories = new ArrayList<>();
+//        while (rs.next()) {
+//            categories.add(extractCategories(rs));
+//        }
+//        return categories;
+//    }
+
 
     protected List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
         List<Ad> ads = new ArrayList<>();
@@ -80,6 +120,23 @@ public class MySQLAdsDao implements Ads {
 
         return userAds;
     }
+
+//
+//    protected List<Categories> getAdsCateogries(int id){
+//        String query = "SELECT * FROM ads_categories WHERE ad_id = ?";
+//        List<Categories> adsCategories=null;
+//        try {
+//            PreparedStatement stmt = connection.prepareStatement(query);
+//            stmt.setInt(1, id);
+//            ResultSet rs = stmt.executeQuery();
+//            adsCategories = createCategoriesList(rs);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return adsCategories;
+//    }
+
 
     public Ad getAdById(long id) throws SQLException {
         String query = "SELECT * FROM ads WHERE id = ?";
@@ -114,17 +171,20 @@ public class MySQLAdsDao implements Ads {
         return updatedAd;
     }
 
-    public void updateAdViewCount(long id){
+    public Ad updateAdViewCount(int id){
         String query = "UPDATE ads SET view_count = view_count + 1 WHERE id = ?";
+        Ad updatedViewCount = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, id);
             stmt.executeUpdate();
-            getAdById(id);
+            updatedViewCount = getAdById(id);
         } catch(SQLException e){
              e.printStackTrace();
         }
+        return updatedViewCount;
     }
+
 
     public void deleteAd(Ad ad){
         String query = "DELETE FROM ads WHERE id = ?";

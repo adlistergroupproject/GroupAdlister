@@ -19,6 +19,6 @@ public interface Ads {
 
     void deleteAd(Ad ad);
 
-    void updateAdViewCount(long id);
+    Ad updateAdViewCount(int id);
 
     }

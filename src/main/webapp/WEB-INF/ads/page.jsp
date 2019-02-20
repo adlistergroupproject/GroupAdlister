@@ -33,7 +33,7 @@
                 </a>
             </div>
 
-        <h5>Page view count is: ${adInfo.viewCount}</h5>
+        <h5>Page view count is: ${updatedViewCountAd}</h5>
     </div>
 </body>
 </html>

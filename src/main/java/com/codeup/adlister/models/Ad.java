@@ -54,11 +54,15 @@ public class Ad implements Jsonable {
         this.price = price;
     }
 
-//    public Ad(long id, long userId, String title, String description, List<Category> categories,   double price, int viewCount) throws StringFormatException {
-//        this(id, userId, title, description, categories, price);
-//        this.viewCount = viewCount;
-//    }
-    public Ad(int viewCount){
+    public Ad(long id, long userId, String title, String description, List<Category> categories, double price, int viewCount) throws
+            NullPointerException,
+            NumberFormatException,
+            StringFormatException{
+        this(id, userId, title, description, categories, price);
+        this.viewCount = viewCount;
+    }
+
+    public Ad(){
         this.viewCount = viewCount;
     }
 
@@ -145,6 +149,7 @@ public class Ad implements Jsonable {
         return "id: " + this.id +
             "\tuserId: " + this.userId +
             "\ttitle: " + this.title +
-            "\tdescription: " + this.description;
+            "\tdescription: " + this.description +
+            "\tviewCount: " + this.viewCount;
     }
 }

@@ -21,15 +21,15 @@ import java.util.List;
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             long adId = Long.parseLong(request.getParameter( "adId"));
             Ad adInfo = null;
-            DaoFactory.getAdsDao().updateAdViewCount(adId);
             try {
                 adInfo = DaoFactory.getAdsDao().getAdById(adId);
             } catch (SQLException e){
                 e.printStackTrace();
             }
-
+            Ad updatedViewCountAd = DaoFactory.getAdsDao().updateAdViewCount(adId);
+            System.out.println(updatedViewCountAd.toString());
             request.setAttribute("adInfo", adInfo);
-            int viewCount = adInfo.getViewCount();
+            int viewCount = updatedViewCountAd.getViewCount();
             System.out.println(viewCount);
             request.setAttribute("viewCount", viewCount);
             request.getRequestDispatcher("/WEB-INF/ads/page.jsp").forward(request, response);
