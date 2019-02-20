@@ -9,8 +9,8 @@ const lettersOnly = (str) => {
     return /^[a-zA-Z]+$/.test(str);
 };
 
-const validEmailAddr = (str) => {
-    return (str.contains("@") && str.contains(".") && !str.contains(' '));
+const isValidEmailAddr = (str) => {
+    return (str.includes("@") && str.includes(".") && !str.includes(" "));
 };
 
 const caseWarning = "Please only enter lowercase or uppercase letters";
@@ -23,23 +23,53 @@ $('#search-bar').keyup((event) => {
     }
 });
 
+const registerForm = {
+    idForm: "#register-form",
+    idUsername: "#register-username",
+    idEmail: "#register-email",
+    idPassword: "#register-password",
+    idConfirm: "#register-confirm-password",
+    idSubmit: "#register-form-btn",
+};
 // watch the froms on the register page
-$('#register-username').keyup(() => {
+$(registerForm.idUsername).keyup(() => {
    let username = $('#register-username').val();
    if(!lettersOnly(username) && username !== ""){
        alert(caseWarning);
    }
 });
-
 // watch the password confirmation text field
-$('#register-confirm-password').keyup(() => {
-    let originalPass = $('#register-password').val();
-    let confirmPass = $('#register-confirm-password').val();
-    console.log(`${originalPass} ${confirmPass}`);
+$(registerForm.idComfirm).keyup(() => {
+    let originalPass = $(registerForm.idPassword).val();
+    let confirmPass = $(registerForm.idConfirm).val();
+    //console.log(`${originalPass} ${confirmPass}`);
 
     if(confirmPass.length >= originalPass.length){
         if(confirmPass !== originalPass){
             alert("Passwords do not match.");
         }
     }
+});
+// watch the submission button for the register form
+$(registerForm.idSubmit).click( (event) => {
+    event.preventDefault();
+
+    let formVals = {
+        username: $(registerForm.idUsername).val(),
+        email: $(registerForm.idEmail).val(),
+        password: $(registerForm.idPassword).val(),
+        confirm: $(registerForm.idConfirm).val(),
+    };
+
+    if(formVals.password !== formVals.confirm){
+        alert("Passwords do not match.");
+    }
+    else if(!isValidEmailAddr(formVals.email)){
+        alert(`Invalid email address: ${formVals.email}`);
+    }
+    else if(!lettersOnly(formVals.username)){
+        alert(`Invalid username: ${formVals.username}`);
+    }
+
+    $(registerForm.idForm).submit();
 });
