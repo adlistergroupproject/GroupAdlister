@@ -12,9 +12,14 @@
     <h1>Search</h1>
     <div>
         <c:forEach var="ad" items="${searchResults}">
-            <div>${ad.id}</div>
-            <div>${ad.title}</div>
-            <div>${ad.description}</div>
+            <hr>
+            <div>
+                <h3>${ad.title}</h3>
+            </div>
+            <div>
+                <p>${ad.description}</p>
+            </div>
+            <br>
         </c:forEach>
     </div>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
