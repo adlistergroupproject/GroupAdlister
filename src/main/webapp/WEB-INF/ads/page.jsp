@@ -28,9 +28,16 @@
             <div class="col-md-6">
                     <h2>${adInfo.title}</h2>
                     <p>${adInfo.description}</p>
-                <a href="/ads/edit?adId=<c:out value="${adInfo.id}"/>">
-                    Edit
-                </a>
+
+            <c:choose>
+                <c:when test="${showEditDeleteButtons}">
+                    <a href="/ads/edit?adId=<c:out value="${adInfo.id}"/>">Edit</a>
+                    <a href="/ads/delete?adId=<c:out value="${adInfo.id}"/>">Delete</a>
+                </c:when>
+                <c:otherwise>
+                   <p> </p>
+                </c:otherwise>
+            </c:choose>
             </div>
     </div>
 
