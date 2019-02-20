@@ -8,6 +8,7 @@
     </jsp:include>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <h1>Search</h1>
     <div>
         <c:forEach var="ad" items="${searchResults}">
@@ -16,5 +17,7 @@
             <div>${ad.description}</div>
         </c:forEach>
     </div>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
 </body>
 </html>
