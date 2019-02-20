@@ -32,11 +32,10 @@
                     Edit
                 </a>
             </div>
+
+        <h5>Page view count is: ${counter}</h5>
     </div>
-
-
 </body>
-
 </html>
 
 

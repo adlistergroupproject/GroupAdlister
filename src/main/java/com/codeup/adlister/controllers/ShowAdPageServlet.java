@@ -19,7 +19,7 @@ import java.util.List;
         private int counter = 0;
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             counter += 1;
-            response.getWriter().println("page view count is: " + counter);
+            System.out.println(counter);
             long adId = Long.parseLong(request.getParameter( "adId"));
             Ad adInfo = null;
             try {
@@ -28,6 +28,7 @@ import java.util.List;
             } catch (SQLException e){
                 e.printStackTrace();
             }
+            request.setAttribute("counter", counter);
             request.setAttribute("adInfo", adInfo);
             request.getRequestDispatcher("/WEB-INF/ads/page.jsp").forward(request, response);
         }
