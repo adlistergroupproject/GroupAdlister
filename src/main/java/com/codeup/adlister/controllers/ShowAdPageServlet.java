@@ -16,20 +16,23 @@ import java.util.List;
 @WebServlet(name = "controllers.ShowAdPageServlet", urlPatterns = "/ads/show")
     public class ShowAdPageServlet extends HttpServlet {
 
-        private int counter = 0;
+
+
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            counter += 1;
-            System.out.println(counter);
             long adId = Long.parseLong(request.getParameter( "adId"));
             Ad adInfo = null;
+            DaoFactory.getAdsDao().updateAdViewCount(adId);
             try {
                 adInfo = DaoFactory.getAdsDao().getAdById(adId);
-
             } catch (SQLException e){
                 e.printStackTrace();
             }
-            request.setAttribute("counter", counter);
+
             request.setAttribute("adInfo", adInfo);
+            int viewCount = adInfo.getViewCount();
+            System.out.println(viewCount);
+            request.setAttribute("viewCount", viewCount);
             request.getRequestDispatcher("/WEB-INF/ads/page.jsp").forward(request, response);
+
         }
     }

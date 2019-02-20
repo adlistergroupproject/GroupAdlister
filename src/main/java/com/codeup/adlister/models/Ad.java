@@ -15,6 +15,7 @@ public class Ad implements Jsonable {
     private String title;
     private String description;
     private List<Category> categories;
+    private int viewCount;
 
     @Deprecated
     public Ad(long id, long userId, String title, String description) {
@@ -51,6 +52,14 @@ public class Ad implements Jsonable {
         this.description = description;
         this.categories = categories;
         this.price = price;
+    }
+
+//    public Ad(long id, long userId, String title, String description, List<Category> categories,   double price, int viewCount) throws StringFormatException {
+//        this(id, userId, title, description, categories, price);
+//        this.viewCount = viewCount;
+//    }
+    public Ad(int viewCount){
+        this.viewCount = viewCount;
     }
 
     private boolean validStringList(List<String> strList){
@@ -93,6 +102,12 @@ public class Ad implements Jsonable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setViewCount(int viewCount){
+        this.viewCount = viewCount;
+    }
+
+    public int getViewCount(){return viewCount;}
 
     public void addCategory(Category category)
             throws StringFormatException

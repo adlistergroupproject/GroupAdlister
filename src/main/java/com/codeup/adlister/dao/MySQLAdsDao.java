@@ -114,6 +114,18 @@ public class MySQLAdsDao implements Ads {
         return updatedAd;
     }
 
+    public void updateAdViewCount(long id){
+        String query = "UPDATE ads SET view_count = view_count + 1 WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+            getAdById(id);
+        } catch(SQLException e){
+             e.printStackTrace();
+        }
+    }
+
     public void deleteAd(Ad ad){
         String query = "DELETE FROM ads WHERE id = ?";
         try{
