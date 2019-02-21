@@ -40,6 +40,7 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
+        // TODO: also insert into categories
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description, view_count) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
@@ -56,16 +57,10 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-
-
-
-
-
     protected Ad extractAd(ResultSet rs) throws SQLException {
+        // dummy categories
         List<Category> categories = new ArrayList<>();
         categories.add(new Category());
-
-
 
         Ad ad = null;
         try {
@@ -161,8 +156,6 @@ public class MySQLAdsDao implements Ads {
         return adById;
     }
 
-
-
     public Ad updateAdInfo(String title, String description, long id){
         String query = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
         Ad updatedAd;
@@ -194,7 +187,6 @@ public class MySQLAdsDao implements Ads {
         return updatedViewCount;
     }
 
-
     public void deleteAd(Ad ad){
         String query = "DELETE FROM ads WHERE id = ?";
         try{
@@ -209,10 +201,6 @@ public class MySQLAdsDao implements Ads {
 
     }
 
-
-
-
-//closes the class:
 }
 
 
