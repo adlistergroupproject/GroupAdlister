@@ -13,15 +13,10 @@ public class NavBarServlet extends HttpServlet {
         boolean ifUserIsLoggedIn;
         if (request.getSession().getAttribute("user") != null) {
             ifUserIsLoggedIn = true;
-            User user = (User) request.getSession().getAttribute("user");
-
         } else{
             ifUserIsLoggedIn = false;
-
         }
         request.setAttribute("ifUserIsLoggedIn", ifUserIsLoggedIn);
         request.getRequestDispatcher("/partials/navbar.jsp").forward(request, response);
-
-
     }
 }
