@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -23,20 +24,29 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
-
-        if (inputHasErrors) {
+        User userAlreadyExists = DaoFactory.getUsersDao().findByUsername(username);
+        if(userAlreadyExists == null) {
             response.sendRedirect("/register");
-            return;
-        }
 
-        // create and save a new user
-        User user = new User(username, email, password);
-        DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/login");
+
+            // validate input
+            boolean inputHasErrors = username.isEmpty()
+                    || email.isEmpty()
+                    || password.isEmpty()
+                    || (!password.equals(passwordConfirmation));
+
+            if (inputHasErrors) {
+                response.sendRedirect("/register");
+                return;
+            }
+
+
+            // create and save a new user
+            User user = new User(username, email, password);
+            DaoFactory.getUsersDao().insert(user);
+            response.sendRedirect("/login");
+        } else {
+            response.sendRedirect("/register/failure");
+        }
     }
 }

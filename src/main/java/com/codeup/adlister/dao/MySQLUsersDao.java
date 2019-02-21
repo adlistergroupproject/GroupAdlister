@@ -54,6 +54,7 @@ public class MySQLUsersDao implements Users {
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating new user", e);
+
         }
     }
 
@@ -149,7 +150,6 @@ public class MySQLUsersDao implements Users {
             e.printStackTrace();
         }
     }
-
 
 
 
