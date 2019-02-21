@@ -8,11 +8,10 @@
 
         <div>
             <form method="get" action="/search">
-<<<<<<< HEAD
+
                 <input id="search-bar" type="text" name="query">
-=======
+
                 Search: <input type="text" name="query" placeholder="Search Anything">
->>>>>>> ead4c9da50f19680b0a116bbf6ae34fd64369c98
             </form>
             <a class="nav-item" href="/ads/create">Create Ad</a>
 
