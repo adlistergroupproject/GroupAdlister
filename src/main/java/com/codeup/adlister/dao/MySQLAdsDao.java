@@ -28,9 +28,11 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> all() {
+        String query = new SQLQuery().select("*").from("ads").done().toString();
+
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads");
+            stmt = connection.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -41,9 +43,13 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         // TODO: also insert into categories
+        // String insertQuery = "INSERT INTO ads(user_id, title, description, view_count) VALUES (?, ?, ?, ?)";
+        String query = new SQLQuery().insertInto("ads", "id, description, title, view_count")
+                .values("?, ?, ?, ?")
+                .done()
+                .toString();
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description, view_count) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
@@ -79,8 +85,6 @@ public class MySQLAdsDao implements Ads {
         return ad;
     }
 
-
-
 //    protected ResultSet extractCategories (ResultSet rs){
 //        List<Categories> categories = null;
 //        SQLQuery query = new SQLQuery().select("*").from("ad_categories").where("ad_id = ?");
@@ -114,9 +118,14 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
 
-
+    // TODO: possibly a duplicate method
     public List<Ad> getUsersAds(long id) throws SQLException {
-        String query = "SELECT * FROM ads WHERE user_id = ?";
+        //String query = "SELECT * FROM ads WHERE user_id = ?";
+        String query = new SQLQuery().select("*").from("ads")
+                .where("user_id = ?")
+                .done()
+                .toString();
+
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setLong(1, id);
         ResultSet rs = stmt.executeQuery();
@@ -141,9 +150,14 @@ public class MySQLAdsDao implements Ads {
 //        return adsCategories;
 //    }
 
-
+    // TODO: possibly a duplicate method
     public Ad getAdById(long id) throws SQLException {
-        String query = "SELECT * FROM ads WHERE id = ?";
+        //String query = "SELECT * FROM ads WHERE id = ?";
+        String query = new SQLQuery().select("*").from("ads")
+                .where("id = ?")
+                .done()
+                .toString();
+
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setLong(1,id);
         ResultSet rs = stmt.executeQuery();
@@ -157,7 +171,12 @@ public class MySQLAdsDao implements Ads {
     }
 
     public Ad updateAdInfo(String title, String description, long id){
-        String query = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        //String query = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        String query = new SQLQuery().update("ads").set("title = ?, description = ?")
+                .where("id = ?")
+                .done()
+                .toString();
+
         Ad updatedAd;
         try {
             PreparedStatement stmt =connection.prepareStatement(query);
@@ -174,7 +193,12 @@ public class MySQLAdsDao implements Ads {
     }
 
     public Ad updateAdViewCount(long id){
-        String query = "UPDATE ads SET view_count = view_count + 1 WHERE id = ?";
+        //String query = "UPDATE ads SET view_count = view_count + 1 WHERE id = ?";
+        String query = new SQLQuery().update("ads").set("view_count = view_count + 1")
+                .where("id = ?")
+                .done()
+                .toString();
+
         Ad updatedViewCount = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -188,7 +212,12 @@ public class MySQLAdsDao implements Ads {
     }
 
     public void deleteAd(Ad ad){
-        String query = "DELETE FROM ads WHERE id = ?";
+        //String query = "DELETE FROM ads WHERE id = ?";
+        String query = new SQLQuery().delete().from("ads")
+                .where("id = ?")
+                .done()
+                .toString();
+
         try{
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, ad.getId());
@@ -197,8 +226,6 @@ public class MySQLAdsDao implements Ads {
         } catch(SQLException e){
             throw new RuntimeException("Error, the Ad was not deleted.");
         }
-
-
     }
 
 }
