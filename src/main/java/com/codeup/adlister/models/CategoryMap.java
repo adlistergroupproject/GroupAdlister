@@ -8,11 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+@Deprecated
 public class CategoryMap implements Categories {
 
     private HashMap<String, String> categories;
     protected static int instances = 0;
 
+    @Deprecated
     public CategoryMap() throws SingletonException {
         instances++;
         if(instances > 1){
@@ -194,6 +196,7 @@ public class CategoryMap implements Categories {
     }
 
     // get category by index
+    @Deprecated
     public String getCategory(int index){
         if(index < 0 || index > this.categories.size()){
             throw new IndexOutOfBoundsException();
@@ -212,10 +215,12 @@ public class CategoryMap implements Categories {
     }
 
     // get category by key
+    @Deprecated
     public String getCategory(String key){
         return this.categories.get(key);
     }
 
+    @Deprecated
     public List<String> getKeys(){
         List<String> keys = new ArrayList<>(this.categories.size());
         Set<String> keySet = this.categories.keySet();
@@ -223,5 +228,20 @@ public class CategoryMap implements Categories {
             keys.add(key);
         }
         return keys;
+    }
+
+    @Deprecated
+    public List<String> getValues(){
+        return null;
+    }
+
+    @Deprecated
+    public List<Category> getAllCategories(){
+        return null;
+    }
+
+    @Deprecated
+    public List<Category> getCategoriesByAd(Ad ad){
+        return null;
     }
 }
