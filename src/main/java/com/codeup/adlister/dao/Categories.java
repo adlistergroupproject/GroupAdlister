@@ -7,12 +7,14 @@ import java.util.List;
 
 public interface Categories {
 
-    String getCategory(int index);
+    Category getCategory(int id);
 
-    String getCategory(String key);
+    Category getCategory(String value);
 
+    @Deprecated
     List<String> getKeys();
 
+    @Deprecated
     List<String> getValues();
 
     List<Category> getAllCategories();
