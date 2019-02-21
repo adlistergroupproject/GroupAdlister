@@ -79,9 +79,7 @@ public class MySQLAdsDao implements Ads {
         System.out.println("DEBUG: extractAd(...)");
         // END DEBUG
 
-        // dummy categories
-        List<Category> categories = new ArrayList<>();
-        categories.add(new Category());
+        //List<Category> categories = DaoFactory.getCategoriesDao().ge
 
         Ad ad = null;
         try {
@@ -90,7 +88,7 @@ public class MySQLAdsDao implements Ads {
                 rs.getLong("user_id"),
                 rs.getString("title"),
                 rs.getString("description"),
-                categories,
+                null,
                 rs.getDouble("price"),
                 rs.getInt("view_count")
             );
@@ -99,30 +97,6 @@ public class MySQLAdsDao implements Ads {
         }
         return ad;
     }
-
-//    protected ResultSet extractCategories (ResultSet rs){
-//        List<Categories> categories = null;
-//        SQLQuery query = new SQLQuery().select("*").from("ad_categories").where("ad_id = ?");
-//        try{
-//            PreparedStatement stmt = connection.prepareStatement(query.toString());
-//            stmt.setInt(1, id);
-//            ResultSet rs = stmt.executeQuery();
-//            List<Categories> adsCategories = createCategoriesList(rs);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        // need to return something here ----------------------------------------------------------------------
-//    }
-//
-
-//    protected List<Categories> createCategoriesList(ResultSet rs){
-//        List<Categories> categories = new ArrayList<>();
-//        while (rs.next()) {
-//            categories.add(extractCategories(rs));
-//        }
-//        return categories;
-//    }
 
     protected List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
         // DEBUG
@@ -134,6 +108,16 @@ public class MySQLAdsDao implements Ads {
         while (rs.next()) {
             ads.add(extractAd(rs));
         }
+
+        // Now that the ads have been selected, put the list of categories in each ad
+        List<Category> categories = null;
+        for(Ad ad : ads){
+            categories = DaoFactory.getCategoriesDao().getCategoriesByAd(ad);
+            for(Category category : categories){
+                ad.addCategory(category);
+            }
+        }
+
         return ads;
     }
 
@@ -158,21 +142,6 @@ public class MySQLAdsDao implements Ads {
 
         return userAds;
     }
-
-//    protected List<Categories> getAdsCateogries(int id){
-//        String query = "SELECT * FROM ads_categories WHERE ad_id = ?";
-//        List<Categories> adsCategories=null;
-//        try {
-//            PreparedStatement stmt = connection.prepareStatement(query);
-//            stmt.setInt(1, id);
-//            ResultSet rs = stmt.executeQuery();
-//            adsCategories = createCategoriesList(rs);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return adsCategories;
-//    }
 
     // TODO: possibly a duplicate method
     public Ad getAdById(long id) throws SQLException {
