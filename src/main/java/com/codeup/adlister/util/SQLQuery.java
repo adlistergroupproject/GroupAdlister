@@ -35,6 +35,26 @@ public class SQLQuery {
         }
     }
 
+    public SQLQuery delete(){
+        return new SQLQuery("DELETE ");
+    }
+
+    public SQLQuery update(String table){
+        return new SQLQuery("UPDATE " + table);
+    }
+
+    public SQLQuery set(String value){
+        return new SQLQuery(this.query + " SET " + value);
+    }
+
+    public SQLQuery insertInto(String table, String columns){
+        return new SQLQuery("INSERT INTO " + table + "(" + columns + ") ");
+    }
+
+    public SQLQuery values(String values){
+        return new SQLQuery(this.query + "VALUES (" + values + ")");
+    }
+
     public SQLQuery from(String table){
         return new SQLQuery(this.query + " FROM " + table);
     }
