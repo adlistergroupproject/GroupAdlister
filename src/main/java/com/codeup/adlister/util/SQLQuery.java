@@ -59,6 +59,14 @@ public class SQLQuery {
         return new SQLQuery(this.query + " FROM " + table);
     }
 
+    public SQLQuery join(String table) {
+        return new SQLQuery(this.query + " JOIN " + table);
+    }
+
+    public SQLQuery on(String statement){
+        return new SQLQuery(this.query + " ON " + statement);
+    }
+
     // standard where query
     public SQLQuery where(String column){
         return new SQLQuery(this.query + " WHERE " + column);
