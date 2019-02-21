@@ -1,5 +1,7 @@
 USE adlister_db;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
 DROP TABLE IF EXISTS ads;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS categories;
@@ -15,18 +17,16 @@ CREATE TABLE users (
 
 CREATE TABLE ads
 (
-    id          INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    user_id     INT UNSIGNED NOT NULL,
-    title       VARCHAR(128) NOT NULL,
-    description TEXT         NOT NULL,
-    view_count  INT UNSIGNED NOT NULL,
-    price DOUBLE UNSIGNED NOT NULL DEFAULT '0.00',
+    id          INT UNSIGNED    NOT NULL AUTO_INCREMENT,
+    user_id     INT UNSIGNED    NOT NULL,
+    title       VARCHAR(128)    NOT NULL,
+    description TEXT            NOT NULL,
+    view_count  INT UNSIGNED    NOT NULL,
+    price       DOUBLE UNSIGNED NOT NULL DEFAULT '0.00',
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
         ON DELETE CASCADE
 );
-
-drop table ads;
 
 CREATE TABLE categories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -42,6 +42,8 @@ CREATE TABLE ad_categories (
     FOREIGN KEY (category_id) REFERENCES categories (id)
        ON DELETE CASCADE
 );
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE USER IF NOT EXISTS 'adlister_admin'@'localhost' IDENTIFIED BY 'supersqlpswrd';
 

@@ -18,7 +18,9 @@ import java.util.List;
 @WebServlet(name = "controllers.ViewProfileServlet", urlPatterns = "/profile")
 public class ViewProfileServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException,
+            IOException {
         if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/login");
             return;
@@ -32,18 +34,12 @@ public class ViewProfileServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        this allows it to be used in the jsp
+        // this allows it to be used in the jsp
         request.setAttribute("userAds", userAds);
         System.out.println();
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
 
-
-
-
-
-
-//    closes the class:
 }
 
 

@@ -21,4 +21,4 @@ public interface Ads {
 
     Ad updateAdViewCount(long id);
 
-    }
+}

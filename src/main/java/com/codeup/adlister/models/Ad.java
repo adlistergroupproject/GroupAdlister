@@ -2,11 +2,6 @@ package com.codeup.adlister.models;
 
 import com.codeup.adlister.util.Jsonable;
 import com.codeup.adlister.util.StringFormatException;
-<<<<<<< HEAD
-=======
-
->>>>>>> ead4c9da50f19680b0a116bbf6ae34fd64369c98
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +32,17 @@ public class Ad implements Jsonable {
         this.categories = null;
     }
 
-    public Ad(long id, long userId, String title, String description, List<Category> categories, double price)
-        throws NullPointerException,
+    public Ad(long id, long userId,
+              String title, String description,
+              List<Category> categories, double price)
+            throws NullPointerException,
             NumberFormatException,
             StringFormatException
     {
-        if(title == null || description == null || categories == null){
+        // DEBUG
+        System.out.println("DEBUG: constructing Ad(...)");
+        // END DEBUG
+        if(title == null || description == null){
             throw new NullPointerException();
         } else if(id < 0 || userId < 0){
             throw new NumberFormatException();
@@ -65,6 +65,7 @@ public class Ad implements Jsonable {
         this.viewCount = viewCount;
     }
 
+    @Deprecated
     public Ad(){
         this.viewCount = viewCount;
     }
@@ -116,12 +117,7 @@ public class Ad implements Jsonable {
 
     public int getViewCount(){return viewCount;}
 
-    public void addCategory(Category category)
-            throws StringFormatException
-    {
-        if(category.equals("")){
-            throw new StringFormatException("Empty string not allowed.");
-        }
+    public void addCategory(Category category) {
         if(this.categories == null){
             this.categories = new ArrayList<Category>();
         }
@@ -149,10 +145,19 @@ public class Ad implements Jsonable {
     }
 
     public String toString(){
-        return "id: " + this.id +
+        String tostring = "id: " + this.id +
             "\tuserId: " + this.userId +
             "\ttitle: " + this.title +
             "\tdescription: " + this.description +
-            "\tviewCount: " + this.viewCount;
+            "\tviewCount: " + this.viewCount +
+            "\tcategories: ";
+        if(this.categories == null){
+            tostring += "null";
+        }else{
+            for(Category category : this.categories){
+                tostring += "{" + category.toString() + "},";
+            }
+        }
+        return tostring;
     }
 }
