@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads {
+
     protected Connection connection = null;
 
     public MySQLAdsDao(Config config) {
@@ -29,7 +30,11 @@ public class MySQLAdsDao implements Ads {
     @Override
     public List<Ad> all() {
         String query = new SQLQuery().select("*").from("ads").done().toString();
-
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: all(...)");
+        System.out.println("DEBUG: " + query);
+        // END DEBUG
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(query);
@@ -44,10 +49,15 @@ public class MySQLAdsDao implements Ads {
     public Long insert(Ad ad) {
         // TODO: also insert into categories
         // String insertQuery = "INSERT INTO ads(user_id, title, description, view_count) VALUES (?, ?, ?, ?)";
-        String query = new SQLQuery().insertInto("ads", "id, description, title, view_count")
+        String query = new SQLQuery().insertInto("ads", "user_id, description, title, view_count")
                 .values("?, ?, ?, ?")
                 .done()
                 .toString();
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: insert(...)");
+        System.out.println("DEBUG: " + query);
+        // END DEBUG
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
@@ -64,6 +74,11 @@ public class MySQLAdsDao implements Ads {
     }
 
     protected Ad extractAd(ResultSet rs) throws SQLException {
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: extractAd(...)");
+        // END DEBUG
+
         // dummy categories
         List<Category> categories = new ArrayList<>();
         categories.add(new Category());
@@ -109,8 +124,12 @@ public class MySQLAdsDao implements Ads {
 //        return categories;
 //    }
 
-
     protected List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: createAdsFromResults(...)");
+        // END DEBUG
+
         List<Ad> ads = new ArrayList<>();
         while (rs.next()) {
             ads.add(extractAd(rs));
@@ -126,6 +145,12 @@ public class MySQLAdsDao implements Ads {
                 .done()
                 .toString();
 
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: getUsersAds(...)");
+        System.out.println("DEBUG: " + query);
+        // END DEBUG
+
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setLong(1, id);
         ResultSet rs = stmt.executeQuery();
@@ -133,8 +158,7 @@ public class MySQLAdsDao implements Ads {
 
         return userAds;
     }
-
-//
+    
 //    protected List<Categories> getAdsCateogries(int id){
 //        String query = "SELECT * FROM ads_categories WHERE ad_id = ?";
 //        List<Categories> adsCategories=null;
@@ -158,6 +182,12 @@ public class MySQLAdsDao implements Ads {
                 .done()
                 .toString();
 
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: getAdByID(...)");
+        System.out.println("DEBUG: " + query);
+        // END DEBUG
+
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setLong(1,id);
         ResultSet rs = stmt.executeQuery();
@@ -176,6 +206,12 @@ public class MySQLAdsDao implements Ads {
                 .where("id = ?")
                 .done()
                 .toString();
+
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: updateAdInfo(...)");
+        System.out.println("DEBUG: " + query);
+        // END DEBUG
 
         Ad updatedAd;
         try {
@@ -199,6 +235,12 @@ public class MySQLAdsDao implements Ads {
                 .done()
                 .toString();
 
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: updateAdViewCount(...)");
+        System.out.println("DEBUG: " + query);
+        // END DEBUG
+
         Ad updatedViewCount = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -217,6 +259,12 @@ public class MySQLAdsDao implements Ads {
                 .where("id = ?")
                 .done()
                 .toString();
+
+        // DEBUG
+        System.out.println("DEBUG: MySQLAdsDao");
+        System.out.println("DEBUG: deleteAd(...)");
+        System.out.println("DEBUG: " + query);
+        // END DEBUG
 
         try{
             PreparedStatement stmt = connection.prepareStatement(query);
