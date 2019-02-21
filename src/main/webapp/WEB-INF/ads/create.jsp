@@ -37,7 +37,7 @@
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
 </body>
 </html>

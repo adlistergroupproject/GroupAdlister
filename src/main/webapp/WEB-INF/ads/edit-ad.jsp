@@ -24,7 +24,7 @@
 <body>
 <div class="container">
     <h1>Edit Your Ad</h1>
-    <form action="/ads/edit" method="post">
+    <form id="edit-ad-form" action="/ads/edit" method="post">
         <div class="form-group">
             <input type="hidden" value="${adInfo.id}" name="adId">
             <label for="title">Title</label>
@@ -39,11 +39,11 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control">${adInfo.description}</textarea>
         </div>
-        <input type="submit" class="btn btn-block btn-primary">
+        <input id="edit-ad-submit" type="submit" class="btn btn-block btn-primary">
     </form>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
 </body>
 </body>
 </html>

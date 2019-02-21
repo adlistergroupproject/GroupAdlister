@@ -17,7 +17,7 @@
 <div class="container">
     <h1>Edit your Information</h1>
     <%--to chnge info--%>
-    <form action="/edit" method="post">
+    <form  id="edit-profile-form" action="/edit" method="post">
         <div class="form-group">
             <label for="updateUsername">Username</label>
             <input id="updateUsername" name="username" class="form-control" type="text" value=${sessionScope.user.username}>
@@ -25,11 +25,11 @@
         <div class="form-group">
             <label for="updateEmail">Email</label>
             <input id="updateEmail" name="email" class="form-control" type="text" value=${sessionScope.user.email}>
-            <input type="submit" value="Save" class="btn btn-primary btn-block">
+            <input id= "edit-profile-button" type="submit" value="Save" class="btn btn-primary btn-block">
         </div>
     </form>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
 </div>
 </body>
 </html>
