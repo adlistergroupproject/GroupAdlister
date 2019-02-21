@@ -21,7 +21,5 @@ public class NavBarServlet extends HttpServlet {
         }
         request.setAttribute("ifUserIsLoggedIn", ifUserIsLoggedIn);
         request.getRequestDispatcher("/partials/navbar.jsp").forward(request, response);
-
-
     }
 }
