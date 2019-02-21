@@ -145,7 +145,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
     }
 
     public void insertIntoAdCategories(Ad ad){
-        
+
         for(Category category : ad.getCategories()){
             insertIntoAdCategories( (int)ad.getId(), category);
         }
