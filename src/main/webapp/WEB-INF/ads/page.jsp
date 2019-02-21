@@ -35,7 +35,6 @@
                     <a href="/ads/delete?adId=<c:out value="${adInfo.id}"/>">Delete</a>
                 </c:when>
                 <c:otherwise>
-                   <p> </p>
                 </c:otherwise>
             </c:choose>
             </div>
