@@ -1,9 +1,9 @@
 USE adlister_db;
 
+DROP TABLE IF EXISTS ad_categories;
 DROP TABLE IF EXISTS ads;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS ad_categories;
 
 CREATE TABLE users (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE ,
@@ -20,13 +20,13 @@ CREATE TABLE ads
     title       VARCHAR(128) NOT NULL,
     description TEXT         NOT NULL,
     view_count  INT UNSIGNED NOT NULL,
+--     decimal will round the price correctly, double will have errors
     price DOUBLE UNSIGNED NOT NULL DEFAULT '0.00',
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
         ON DELETE CASCADE
 );
 
-drop table ads;
 
 CREATE TABLE categories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,

@@ -2,10 +2,7 @@ package com.codeup.adlister.models;
 
 import com.codeup.adlister.util.Jsonable;
 import com.codeup.adlister.util.StringFormatException;
-<<<<<<< HEAD
-=======
 
->>>>>>> ead4c9da50f19680b0a116bbf6ae34fd64369c98
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,6 +112,10 @@ public class Ad implements Jsonable {
     }
 
     public int getViewCount(){return viewCount;}
+
+    public double getPrice() { return price; }
+
+    public void setPrice(double price) { this.price = price; }
 
     public void addCategory(Category category)
             throws StringFormatException

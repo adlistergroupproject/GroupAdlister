@@ -28,6 +28,8 @@
             <input type="submit" value="Save" class="btn btn-primary btn-block">
         </div>
     </form>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
 </div>
 </body>
 </html>

@@ -69,7 +69,17 @@ $(registerForm.idSubmit).click( (event) => {
     }
     else if(!lettersOnly(formVals.username)){
         alert(`Invalid username: ${formVals.username}`);
+    } else {
+        $(registerForm.idForm).submit();
     }
 
-    $(registerForm.idForm).submit();
 });
+
+
+
+//LEXI TODO:
+// -forms: include this at the bottom in all forms
+//     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+//     <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
+//THEN customize the last chunk of code on here to listen to each form
+//-make a new object for log in and edit and then check those values
