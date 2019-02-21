@@ -59,7 +59,11 @@ public class MySQLAdsDao implements Ads {
         System.out.println("DEBUG: " + query);
         // END DEBUG
         try {
+
+
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
@@ -73,6 +77,7 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error creating a new ad.", e);
         }
     }
+
 
     protected Ad extractAd(ResultSet rs) throws SQLException {
         // DEBUG

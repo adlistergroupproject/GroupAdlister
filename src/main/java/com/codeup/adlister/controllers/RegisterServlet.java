@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -23,20 +24,38 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
+//     check if the username is already being used:
+        User userAlreadyExists = DaoFactory.getUsersDao().findByUsername(username);
+//      check if the email is already being used:
+        User emailBeingUsed = DaoFactory.getUsersDao().findByEmail(email);
 
-        if (inputHasErrors) {
-            response.sendRedirect("/register");
-            return;
+        if(userAlreadyExists == null) {
+            if(emailBeingUsed == null) {
+//                response.sendRedirect("/register");
+
+
+                // validate input
+                boolean inputHasErrors = username.isEmpty()
+                        || email.isEmpty()
+                        || password.isEmpty()
+                        || (!password.equals(passwordConfirmation));
+
+                if (inputHasErrors) {
+                    response.sendRedirect("/register");
+                    return;
+                } else {
+                    // create and save a new user
+                    User user = new User(username, email, password);
+                    DaoFactory.getUsersDao().insert(user);
+                    response.sendRedirect("/login");
+                }
+//          if the email is already used send to failure page:
+            } else {
+                response.sendRedirect("/register/failure/email");
+            }
+//          if the username is already used send to failure page:
+        } else {
+            response.sendRedirect("/register/failure");
         }
-
-        // create and save a new user
-        User user = new User(username, email, password);
-        DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/login");
     }
 }
