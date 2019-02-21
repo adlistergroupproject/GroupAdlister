@@ -11,6 +11,24 @@ import java.io.IOException;
 @WebServlet(name = "controllers.NavBarServlet")
 public class NavBarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/partials/navbar.jsp").forward(request, response);
+
+        boolean ifUserIsLoggedIn = false;
+        System.out.println(ifUserIsLoggedIn);
+        System.out.println("should be false");
+
+
+        if (request.getSession().getAttribute("user") != null) {
+            User user = (User) request.getSession().getAttribute("user");
+            ifUserIsLoggedIn = true;
+            System.out.println(ifUserIsLoggedIn);
+            System.out.println("should be true");
+        } else{
+            ifUserIsLoggedIn = false;
+            System.out.println(ifUserIsLoggedIn);
+            System.out.println("should be false");
+        }
+
+        request.setAttribute("ifUserIsLoggedIn", ifUserIsLoggedIn);
+
     }
 }
