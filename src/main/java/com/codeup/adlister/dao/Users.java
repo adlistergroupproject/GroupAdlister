@@ -12,4 +12,5 @@ public interface Users {
     User updateUserPassword(String password, long id);
     void deleteUser(User user);
     void deleteUsersAds(User user);
+    User findByEmail(String email);
 }

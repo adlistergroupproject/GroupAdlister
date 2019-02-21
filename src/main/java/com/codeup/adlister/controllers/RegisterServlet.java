@@ -24,27 +24,36 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
+//     check if the username is already being used:
         User userAlreadyExists = DaoFactory.getUsersDao().findByUsername(username);
+//      check if the email is already being used:
+        User emailBeingUsed = DaoFactory.getUsersDao().findByEmail(email);
+
         if(userAlreadyExists == null) {
-            response.sendRedirect("/register");
+            if(emailBeingUsed == null) {
+//                response.sendRedirect("/register");
 
 
-            // validate input
-            boolean inputHasErrors = username.isEmpty()
-                    || email.isEmpty()
-                    || password.isEmpty()
-                    || (!password.equals(passwordConfirmation));
+                // validate input
+                boolean inputHasErrors = username.isEmpty()
+                        || email.isEmpty()
+                        || password.isEmpty()
+                        || (!password.equals(passwordConfirmation));
 
-            if (inputHasErrors) {
-                response.sendRedirect("/register");
-                return;
+                if (inputHasErrors) {
+                    response.sendRedirect("/register");
+                    return;
+                } else {
+                    // create and save a new user
+                    User user = new User(username, email, password);
+                    DaoFactory.getUsersDao().insert(user);
+                    response.sendRedirect("/login");
+                }
+//          if the email is already used send to failure page:
+            } else {
+                response.sendRedirect("/register/failure/email");
             }
-
-
-            // create and save a new user
-            User user = new User(username, email, password);
-            DaoFactory.getUsersDao().insert(user);
-            response.sendRedirect("/login");
+//          if the username is already used send to failure page:
         } else {
             response.sendRedirect("/register/failure");
         }
