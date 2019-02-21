@@ -45,12 +45,11 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-
     @Override
     public Long insert(Ad ad) {
         // TODO: also insert into categories
         // String insertQuery = "INSERT INTO ads(user_id, title, description, view_count) VALUES (?, ?, ?, ?)";
-        String query = new SQLQuery().insertInto("ads", "user_id, description, title, view_count")
+        String query = new SQLQuery().insertInto("ads", "user_id, title, description, view_count")
                 .values("?, ?, ?, ?")
                 .done()
                 .toString();
@@ -61,7 +60,9 @@ public class MySQLAdsDao implements Ads {
         // END DEBUG
         try {
 
+
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
 
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
@@ -221,7 +222,7 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
             updatedViewCount = getAdById(id);
         } catch(SQLException e){
-            e.printStackTrace();
+             e.printStackTrace();
         }
         return updatedViewCount;
     }
