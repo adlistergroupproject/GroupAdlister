@@ -1,3 +1,8 @@
 body {
-    background-color: whitesmoke;
+    !important;background-color: #F0A202;
+    !important;color: #0E1428;
 }
+a {
+    !important;color: #0E1428;
+}
+
