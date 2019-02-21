@@ -26,8 +26,6 @@ CREATE TABLE ads
         ON DELETE CASCADE
 );
 
-drop table ads;
-
 CREATE TABLE categories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     category VARCHAR(64) NOT NULL UNIQUE,

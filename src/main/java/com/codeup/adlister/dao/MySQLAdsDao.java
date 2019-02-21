@@ -73,7 +73,7 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    protected Ad extractAd(ResultSet rs) throws SQLException {
+    protected Ad extractAd(ResultSet rs) {
         // DEBUG
         System.out.println("DEBUG: MySQLAdsDao");
         System.out.println("DEBUG: extractAd(...)");
@@ -158,7 +158,7 @@ public class MySQLAdsDao implements Ads {
 
         return userAds;
     }
-    
+
 //    protected List<Categories> getAdsCateogries(int id){
 //        String query = "SELECT * FROM ads_categories WHERE ad_id = ?";
 //        List<Categories> adsCategories=null;
