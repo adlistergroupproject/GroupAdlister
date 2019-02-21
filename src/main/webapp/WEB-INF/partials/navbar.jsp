@@ -11,14 +11,14 @@
             <form method="get" action="/search">
                 Search: <input type="text" name="query" placeholder="Search Anything">
             </form>
-            <a class="nav-item" href="/ads/create">Create Ad</a>
-
         </div>
+
 
 
         <ul class="nav navbar-nav navbar-right">
             <c:choose>
                 <c:when test="${ifUserIsLoggedIn}">
+                    <li><a class="nav-item" href="/ads/create">Create Ad</a></li>
                     <li><a href="/profile">Profile</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </c:when>
