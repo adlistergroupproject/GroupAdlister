@@ -9,9 +9,6 @@
 
         <div>
             <form method="get" action="/search">
-
-                <input id="search-bar" type="text" name="query">
-
                 Search: <input type="text" name="query" placeholder="Search Anything">
             </form>
             <a class="nav-item" href="/ads/create">Create Ad</a>
