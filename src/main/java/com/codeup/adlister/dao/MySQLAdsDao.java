@@ -73,7 +73,7 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    protected Ad extractAd(ResultSet rs) {
+    protected Ad extractAd(ResultSet rs) throws SQLException {
         // DEBUG
         System.out.println("DEBUG: MySQLAdsDao");
         System.out.println("DEBUG: extractAd(...)");
