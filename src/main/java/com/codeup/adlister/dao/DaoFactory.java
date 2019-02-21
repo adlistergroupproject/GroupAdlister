@@ -1,8 +1,4 @@
 package com.codeup.adlister.dao;
-
-import com.codeup.adlister.models.CategoryMap;
-import com.codeup.adlister.util.SingletonException;
-
 public class DaoFactory {
 
     // database accessors
