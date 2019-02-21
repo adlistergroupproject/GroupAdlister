@@ -134,6 +134,14 @@ public class Ad implements Jsonable {
         return this.categories;
     }
 
+    public Double getPrice(){
+        return this.price;
+    }
+
+    public void setPrice(Double price){
+        this.price = price;
+    }
+
     public String toJSON(){
         String json = "{";
         json += "\"id\":\"" + this.id + "\",";

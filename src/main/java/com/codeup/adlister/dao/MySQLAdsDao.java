@@ -49,7 +49,7 @@ public class MySQLAdsDao implements Ads {
     public Long insert(Ad ad) {
         // TODO: also insert into categories
         // String insertQuery = "INSERT INTO ads(user_id, title, description, view_count) VALUES (?, ?, ?, ?)";
-        String query = new SQLQuery().insertInto("ads", "user_id, title, description, view_count")
+        String query = new SQLQuery().insertInto("ads", "user_id, title, description, view_count, price")
                 .values("?, ?, ?, ?")
                 .done()
                 .toString();
@@ -63,7 +63,8 @@ public class MySQLAdsDao implements Ads {
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
-            stmt.setInt(4, 0);
+            stmt.setInt(4, ad.getViewCount());
+            stmt.setDouble(5, ad.getPrice());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -78,8 +79,6 @@ public class MySQLAdsDao implements Ads {
         System.out.println("DEBUG: MySQLAdsDao");
         System.out.println("DEBUG: extractAd(...)");
         // END DEBUG
-
-        //List<Category> categories = DaoFactory.getCategoriesDao().ge
 
         Ad ad = null;
         try {
