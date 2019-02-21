@@ -21,4 +21,7 @@ public interface Categories {
 
     List<Category> getCategoriesByAd(Ad ad);
 
+    long insertIntoAdCategories(int adId, Category category);
+
+    void insertIntoAdCategories(Ad ad);
 }

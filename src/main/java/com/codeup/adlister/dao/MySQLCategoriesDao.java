@@ -7,6 +7,7 @@ import com.codeup.adlister.util.SQLQuery;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,6 +115,40 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
                 .toString();
 
         return executeQueryOnCategories(query);
+    }
+
+    public long insertIntoAdCategories(int adId, Category category){
+
+        //String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
+        String query = new SQLQuery()
+                .insertInto("ad_categories", "ad_id, category_id")
+                .values("? ?")
+                .done().toString();
+
+        long status = -1;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, adId);
+            stmt.setInt(2, category.getId());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            status = rs.getLong(1);
+        } catch (SQLException e) {
+            // DEBUG
+            System.out.println("DEBUG: insertIntoAdCategories(...): FAILED TO INSERT " + category.toString());
+            System.out.println("DEBUG: " + query);
+            // END DEBUG
+        }
+
+        return status;
+    }
+
+    public void insertIntoAdCategories(Ad ad){
+        
+        for(Category category : ad.getCategories()){
+            insertIntoAdCategories( (int)ad.getId(), category);
+        }
     }
 
 }
