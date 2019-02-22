@@ -33,7 +33,7 @@
         <%--will have to add in the ${} to get the price once its in the db}--%>
         <div class="form-group">
             <label for="price">Price</label>
-            <input id="price" name="price" class="form-control">
+            <input id="price" name="price" class="form-control" value="$${adInfo.price}">
         </div>
         <div class="form-group">
             <label for="description">Description</label>

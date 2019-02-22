@@ -33,11 +33,15 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
         System.out.println("DEBUG: MySQLCategoriesDao");
         System.out.println("\tDEBUG: createCategoriesFromResults(...)");
         // END DEBUG
-        List<Category> categories = new ArrayList<>();
-        while (rs.next()) {
-            categories.add(extractCategory(rs));
+        try {
+            List<Category> categories = new ArrayList<>();
+            while (rs.next()) {
+                categories.add(extractCategory(rs));
+            }
+            return categories;
+        } catch(IndexOutOfBoundsException e){
+            return null;
         }
-        return categories;
     }
 
     private List<Category> executeQueryOnCategories(String query){
@@ -76,20 +80,27 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
         return category;
     }
 
-    public Category getCategory(final String value){
+    public Category getCategory(final String value) throws Exception {
         // DEBUG
         System.out.println("\tDEBUG: getCategory(...)");
         // END DEBUG
         String query = new SQLQuery().select("*").from("categories")
                 .where("category").like(value)
                 .done().toString();
-
+        List<Category> singleCategory = null;
         Category category = null;
-        try{
-            category = executeQueryOnCategories(query).get(0);
-        } catch(NullPointerException e){
-            e.printStackTrace();
+        singleCategory = executeQueryOnCategories(query);
+
+        if (singleCategory == null){
+            return null;
         }
+        else if(singleCategory != null && singleCategory.size() > 0){
+            category = singleCategory.get(0);
+        }
+        else {
+            throw new Exception();
+        }
+
         return category;
     }
 

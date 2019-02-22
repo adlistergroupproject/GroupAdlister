@@ -1,14 +1,14 @@
 USE adlister_db;
 
 
-# clear all the tables if there is data
-# mysql will yell at us over foreign keys, so ignore them for now
+-- # clear all the tables if there is data
+-- # mysql will yell at us over foreign keys, so ignore them for now
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE categories;
 TRUNCATE TABLE users;
 TRUNCATE TABLE ads;
 
-# insert 184 categories
+-- # insert 184 categories
 INSERT INTO categories (category) VALUES
        ('activities'),
        ('artists'),
@@ -180,7 +180,7 @@ INSERT INTO categories (category) VALUES
        ('talent'),
        ('writing');
 
-# Insert a few users
+-- # Insert a few users
 INSERT INTO users (username, email, password)
   VALUES ('Marcus Lycus', 'marcuslicus@lorem.com', '$2a$10$Xb8.QOh8AWXVA3M66vUBJOoRoWAXvMdYEZC20p0AM7/3dde/usU6m'),
          ('Grumio', 'grumio@lorem.com', '$2a$10$Xb8.QOh8AWXVA3M66vUBJOoRoWAXvMdYEZC20p0AM7/3dde/usU6m'),
@@ -198,14 +198,14 @@ INSERT INTO users (username, email, password)
          ('Panacea','panacea@lorem.com', '$2a$10$Xb8.QOh8AWXVA3M66vUBJOoRoWAXvMdYEZC20p0AM7/3dde/usU6m'),
          ('Proteans','proteans@lorem.com', '$2a$10$Xb8.QOh8AWXVA3M66vUBJOoRoWAXvMdYEZC20p0AM7/3dde/usU6m');
 
-# Asign some advertisements to the users
-INSERT INTO ads (user_id, title, description, view_count) VALUES
-('0', 'Lorem ipsum dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in pharetra urna, nec tincidunt justo.', '0'),
-('1', 'Lorem ipsum dolor sit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elit felis, finibus a nibh a, sagittis gravida enim. Vestibulum ante.', '0'),
-('2', 'Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis neque magna, in rhoncus elit porta eu. Sed.', '0'),
-('3', 'Maecenas mattis euismod purus.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer turpis enim, convallis et augue ut, pellentesque lobortis.', '0');
+-- # Asign some advertisements to the users
+INSERT INTO ads (user_id, title, description, view_count, price) VALUES
+('0', 'Lorem ipsum dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in pharetra urna, nec tincidunt justo.', '0', '2.99'),
+('1', 'Lorem ipsum dolor sit.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elit felis, finibus a nibh a, sagittis gravida enim. Vestibulum ante.', '0', '78.98'),
+('2', 'Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis neque magna, in rhoncus elit porta eu. Sed.', '0', '12.50'),
+('3', 'Maecenas mattis euismod purus.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer turpis enim, convallis et augue ut, pellentesque lobortis.', '0', '65.00');
 
-# Assign categories to the advertisements
+-- # Assign categories to the advertisements
 INSERT INTO ad_categories (ad_id, category_id)
 VALUES ('0', '2'),
        ('0', '3'),
@@ -221,5 +221,5 @@ VALUES ('0', '2'),
        ('3', '37'),
        ('3', '43');
 
-# stop ignoring foreign keys
+-- # stop ignoring foreign keys
 SET FOREIGN_KEY_CHECKS = 1;

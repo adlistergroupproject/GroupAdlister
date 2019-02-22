@@ -9,7 +9,7 @@ public interface Categories {
 
     Category getCategory(int id);
 
-    Category getCategory(String value);
+    Category getCategory(String value) throws Exception;
 
     List<Category> getAllCategories();
 
