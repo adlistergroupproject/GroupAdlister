@@ -6,8 +6,9 @@
         <!-- Brand and toggle get grouped for better mobile display -->
 
         <div class="navbar-header">
-            <a class="navbar-brand" href="/ads">Adlister</a>
+            <a class="navbar-brand" href="/ads">HOME</a>
         </div>
+
         <form class="form-inline navbar-left mt-2" method="get" action="/search">
             <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search">
         </form>
