@@ -93,16 +93,6 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
         return category;
     }
 
-    @Deprecated
-    public List<String> getKeys(){
-        return null;
-    }
-
-    @Deprecated
-    public List<String> getValues(){
-        return null;
-    }
-
     public List<Category> getAllCategories(){
         // DEBUG
         System.out.println("\tDEBUG: getAllCategories(...)");
