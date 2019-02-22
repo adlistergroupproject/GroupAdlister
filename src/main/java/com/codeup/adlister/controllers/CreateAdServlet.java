@@ -17,11 +17,18 @@ import java.util.List;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/login");
             return;
         }
+
+        List<Category> categories = DaoFactory.getCategoriesDao().getAllCategories();
+        // DEBUG
+        System.out.println("DEBUG: number of categories: " + categories.size());
+        // END DEBUG
+        request.setAttribute("categories", categories);
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
@@ -30,14 +37,11 @@ public class CreateAdServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         request.getParameter("category");
         List<Category> categories = new ArrayList<>();
+        // TODO: add price and categories here
         Ad ad = new Ad(
             user.getId(),
             request.getParameter("title"),
             request.getParameter("description")
-
-//   once we merge and pull from master I can add in the price field that James added to the ads table in the db:
-//            request.getParameter("price")
-
         );
         try {
             DaoFactory.getAdsDao().insert(ad);
