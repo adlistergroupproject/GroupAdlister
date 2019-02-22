@@ -4,6 +4,7 @@ import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.StringFormatException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,21 +36,45 @@ public class CreateAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
-        request.getParameter("category");
-        List<Category> categories = new ArrayList<>();
-        // TODO: add price and categories here
-        Ad ad = new Ad(
-            user.getId(),
-            request.getParameter("title"),
-            request.getParameter("description")
-        );
+        // DEBUG
+        debugPost(request);
+        // END DEBUG
+        List<Category> categoryList = new ArrayList<>();
+        categoryList.add(DaoFactory.getCategoriesDao().getCategory(request.getParameter("categories")));
+
+        Ad ad = null;
         try {
+            ad = new Ad(0, user.getId(),
+                    request.getParameter("title"),
+                    request.getParameter("description"),
+                    categoryList,
+                    Double.parseDouble(request.getParameter("price")),
+                    0);
             DaoFactory.getAdsDao().insert(ad);
+            DaoFactory.getCategoriesDao().insertIntoAdCategories(ad);
+        } catch(StringFormatException e){
+            // TODO: redirect on bad input
+            System.out.println("\t\tDEBUG: StringFromatException occurred. Send redirect...");
+            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         response.sendRedirect("/ads");
     }
+
+    // The following debug method prints all the content of the request
+    private void debugPost(HttpServletRequest request){
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String categories = request.getParameter("categories");
+        String price = request.getParameter("price");
+
+        System.out.println("DEBUG: CreateAdServlet.java");
+        System.out.println("\tDEBUG: doPost(...)");
+        System.out.println("\t\tDEBUG: title = " + title);
+        System.out.println("\t\tDEBUG: description = " + description);
+        System.out.println("\t\tDEBUG: categories = " + categories);
+        System.out.println("\t\tDEBUG: price = " + price);
+    }
 }
-// when the ad is created, we need to insert the ad into the ad table, and then we need to get the ad object, and we need a new method that takes
-// in the ad object and then we can access the category list

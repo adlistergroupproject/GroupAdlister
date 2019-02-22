@@ -11,12 +11,6 @@ public interface Categories {
 
     Category getCategory(String value);
 
-    @Deprecated
-    List<String> getKeys();
-
-    @Deprecated
-    List<String> getValues();
-
     List<Category> getAllCategories();
 
     List<Category> getCategoriesByAd(Ad ad);
