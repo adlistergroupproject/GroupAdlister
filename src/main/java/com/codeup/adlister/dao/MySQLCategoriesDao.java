@@ -19,8 +19,8 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
 
     private Category extractCategory(ResultSet rs) throws SQLException {
         // DEBUG
-        System.out.println("DEBUG: MySQLAdsDao");
-        System.out.println("\tDEBUG: extractCategory(...)");
+        //System.out.println("DEBUG: MySQLAdsDao");
+        //System.out.println("\tDEBUG: extractCategory(...)");
         // END DEBUG
 
         Category category = null;
@@ -43,7 +43,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
     private List<Category> executeQueryOnCategories(String query){
         // DEBUG
         System.out.println("\tDEBUG: executeQueryOnCategories(...)");
-        System.out.println(query);
+        System.out.println("\t\tDEBUG: " + query);
         // END DEBUG
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -53,7 +53,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
             rs = stmt.executeQuery();
             categories = createCategoriesFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving all ads.", e);
+            throw new RuntimeException("Error retrieving categories", e);
         }
         return categories;
     }
