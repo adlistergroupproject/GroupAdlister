@@ -6,7 +6,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-        <a class="navbar-brand" href="/ads">Adlister</a>
+        <a class="navbar-brand" href="/ads"><i class="fas fa-dog"></i></a>
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
