@@ -20,7 +20,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
     private Category extractCategory(ResultSet rs) throws SQLException {
         // DEBUG
         System.out.println("DEBUG: MySQLAdsDao");
-        System.out.println("DEBUG: extractCategory(...)");
+        System.out.println("\tDEBUG: extractCategory(...)");
         // END DEBUG
 
         Category category = null;
@@ -31,7 +31,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
     private List<Category> createCategoriesFromResults(ResultSet rs) throws SQLException {
         // DEBUG
         System.out.println("DEBUG: MySQLCategoriesDao");
-        System.out.println("DEBUG: createCategoriesFromResults(...)");
+        System.out.println("\tDEBUG: createCategoriesFromResults(...)");
         // END DEBUG
         List<Category> categories = new ArrayList<>();
         while (rs.next()) {
@@ -42,7 +42,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
 
     private List<Category> executeQueryOnCategories(String query){
         // DEBUG
-        System.out.println("DEBUG: executeQueryOnCategories(...)");
+        System.out.println("\tDEBUG: executeQueryOnCategories(...)");
         System.out.println(query);
         // END DEBUG
         PreparedStatement stmt = null;
@@ -60,7 +60,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
 
     public Category getCategory(final int index){
         // DEBUG
-        System.out.println("DEBUG: getCategoy(...)");
+        System.out.println("\tDEBUG: getCategory(...)");
         // END DEBUG
         String query = new SQLQuery().select("*").from("categories")
                 .where("id = " + index)
@@ -76,9 +76,21 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
         return category;
     }
 
-    public Category getCategory(String key){
-        // TODO: method might be redundant
-        return null;
+    public Category getCategory(final String value){
+        // DEBUG
+        System.out.println("\tDEBUG: getCategory(...)");
+        // END DEBUG
+        String query = new SQLQuery().select("*").from("categories")
+                .where("category").like(value)
+                .done().toString();
+
+        Category category = null;
+        try{
+            category = executeQueryOnCategories(query).get(0);
+        } catch(NullPointerException e){
+            e.printStackTrace();
+        }
+        return category;
     }
 
     @Deprecated
@@ -93,7 +105,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
 
     public List<Category> getAllCategories(){
         // DEBUG
-        System.out.println("DEBUG: getAllCategories(...)");
+        System.out.println("\tDEBUG: getAllCategories(...)");
         // END DEBUG
         String query = new SQLQuery().select("*").from("categories").done().toString();
         return executeQueryOnCategories(query);
@@ -101,7 +113,7 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
 
     public List<Category> getCategoriesByAd(Ad ad){
         // DEBUG
-        System.out.println("DEBUG: getCategoriesByAd(...)");
+        System.out.println("\tDEBUG: getCategoriesByAd(...)");
         // END DEBUG
         //String query = "SELECT categories.id, categories.category FROM ad_categories\n" +
         //        "JOIN categories ON categories.id = ad_categories.category_id\n" +
@@ -136,8 +148,8 @@ public class MySQLCategoriesDao extends MySQLAdsDao implements Categories {
             status = rs.getLong(1);
         } catch (SQLException e) {
             // DEBUG
-            System.out.println("DEBUG: insertIntoAdCategories(...): FAILED TO INSERT " + category.toString());
-            System.out.println("DEBUG: " + query);
+            System.out.println("\tDEBUG: insertIntoAdCategories(...): FAILED TO INSERT " + category.toString());
+            System.out.println("\t\tDEBUG: " + query);
             // END DEBUG
         }
 
