@@ -9,7 +9,7 @@
 <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>Welcome to the Adlister!</h1>
+        <h1><i class="fas fa-home"></i></h1>
             <form action="/login" method="get">
         <button type="button" class="btn btn-primary">Login</button>
             </form>
