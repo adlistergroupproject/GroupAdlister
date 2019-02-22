@@ -23,6 +23,7 @@
                                 <div class="card-body">
                                     <a href="/ads/show?adId=<c:out value="${ad.id}"/>">
                                         <h2 class="card-title">${ad.title}</h2>
+                                        <p>$${ad.price}</p>
                                         <p class="card-text">${ad.description}</p>
                                     </a>
                                     <a class="btn btn-info btn-sm" href="/ads/edit?adId=<c:out value="${ad.id}"/>">Edit</a>

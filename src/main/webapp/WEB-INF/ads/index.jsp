@@ -20,6 +20,7 @@
                                               <a href="/ads/show?adId=<c:out value="${ad.id}"/>">
                                                 <div class="col-sm-6">
                                                     <h2 class="card-title">${ad.title}</h2>
+                                                    <p>$${ad.price}</p>
                                                     <p class="card-text">${ad.description}</p>
                                                 </div>
                                              </a>

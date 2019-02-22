@@ -40,7 +40,11 @@ public class CreateAdServlet extends HttpServlet {
         debugPost(request);
         // END DEBUG
         List<Category> categoryList = new ArrayList<>();
-        categoryList.add(DaoFactory.getCategoriesDao().getCategory(request.getParameter("categories")));
+        try {
+            categoryList.add(DaoFactory.getCategoriesDao().getCategory(request.getParameter("categories")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Ad ad = null;
         try {
@@ -58,6 +62,8 @@ public class CreateAdServlet extends HttpServlet {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e){
+            response.sendRedirect("/ad/categories");
         }
 
         response.sendRedirect("/ads");
